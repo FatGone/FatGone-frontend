@@ -6,7 +6,7 @@ import { ref } from 'vue';
 const verificationCode = ref('');
 const error = ref('');
 async function confirm() {
-  console.log('registration');
+  console.log('registration step 2');
 }
 </script>
 
@@ -65,8 +65,8 @@ async function confirm() {
   }
 
   .button {
-    font-size: 13px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 30px;
     font-weight: 500;
     cursor: pointer;
   }

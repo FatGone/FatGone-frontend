@@ -93,10 +93,11 @@ async function confirm() {
   }
 
   .button {
-    font-size: 13px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 30px;
     font-weight: 500;
     cursor: pointer;
+    margin-top: 10px;
   }
 
   .buttonPrimary {
