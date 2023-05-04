@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import Logo from '@/common/components/Logo.vue';
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
+import Logo from '@/common/components/Logo.vue';
+import { ref } from 'vue';
 
 const email = ref('');
 const password = ref('');
 const error = ref('');
 async function login() {
-  console.log('login');
+  console.log('registration');
 }
 </script>
 
 <template>
   <div class="wrapper h100">
     <div class="content justContCenter" style="margin: 0 10%;">
-      <Logo />
+      <Logo/>
       <div class="content w100 itemsCenter" style="margin-top: 50px">
-        <h1 class="flex">Logowanie</h1>
+        <h1 class="flex">Rejestracja</h1>
         <div class="formWrapper">
             <form class="form">
               <input class="input" v-model="email"/>
@@ -25,8 +25,8 @@ async function login() {
               <label class="floatingLabel" style="top: 75px;">Password</label>
               <span>{{ error }}</span>
               <div class="buttonsWrapper">
-                <button type="submit" class="button buttonSecondary">Przypomnij hasło</button>
-                <button type="submit" class="button buttonPrimary" @click="login()">Zaloguj</button>
+                <button type="submit" class="button buttonSecondary">Masz już konto? Załoguj się</button>
+                <button type="submit" class="button buttonPrimary" @click="login()">Zarejestruj się</button>
               </div>
             </form>
         </div>
@@ -61,7 +61,7 @@ async function login() {
   .form {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
     padding: 30px 0 30px 0;
   }
 
@@ -81,14 +81,15 @@ async function login() {
     background: #FFBA32;
     border: 1px solid black;
     border-radius: 10px;
-    width: 30%;
+    width: 40%;
   }
 
   .buttonSecondary {
     color: #FFBA32;
     border: none;
     background: none;
-    width: 50%;
+    width: 70%;
+    margin-right: 5px;
   }
 
   .buttonPrimary:hover {
@@ -122,6 +123,11 @@ async function login() {
     transition: 0.2s;
     padding: 0 5px;
     background: linear-gradient(0deg, rgba(211, 187, 255, 0.05), rgba(211, 187, 255, 0.05)), #1D1B1E;
+  }
+
+  p {
+    color: #EAE1D9;
+    font-size: 25px
   }
 
   h1 {

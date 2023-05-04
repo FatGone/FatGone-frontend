@@ -1,34 +1,28 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import Logo from '@/common/components/Logo.vue';
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
+import Logo from '@/common/components/Logo.vue';
+import { ref } from 'vue';
 
-const email = ref('');
-const password = ref('');
+const verificationCode = ref('');
 const error = ref('');
-async function login() {
-  console.log('login');
+async function confirm() {
+  console.log('registration');
 }
 </script>
 
 <template>
   <div class="wrapper h100">
-    <div class="content justContCenter" style="margin: 0 10%;">
-      <Logo />
+    <div class="content justContCenter itemsCenter" style="margin: 0 10%;">
+      <Logo/>
       <div class="content w100 itemsCenter" style="margin-top: 50px">
-        <h1 class="flex">Logowanie</h1>
+        <h1 class="flex">Potwierdź swój adres e-mail</h1>
         <div class="formWrapper">
-            <form class="form">
-              <input class="input" v-model="email"/>
-              <label class="floatingLabel" style="top: 20px;">Adres e-mail</label>
-              <input class="input" type="password" v-model="password"/>
-              <label class="floatingLabel" style="top: 75px;">Password</label>
-              <span>{{ error }}</span>
-              <div class="buttonsWrapper">
-                <button type="submit" class="button buttonSecondary">Przypomnij hasło</button>
-                <button type="submit" class="button buttonPrimary" @click="login()">Zaloguj</button>
-              </div>
-            </form>
+          <form class="form">
+            <p>Na twój adres e-mail kon**********@gmail.com wysłaliśmy wiadomość z kodem weryfikacyjnym podaj go w polu poniżej żeby dokończyć rejestrację</p>
+            <input class="input" v-model="verificationCode" placeholder="Kod weryfikacyjny"/>
+            <span>{{ error }}</span>
+            <button type="submit" class="button buttonPrimary" @click="confirm()">Potwierdz</button>
+          </form>
         </div>
       </div>
     </div>
@@ -53,7 +47,7 @@ async function login() {
     align-items: center;
     background: linear-gradient(0deg, rgba(211, 187, 255, 0.05), rgba(211, 187, 255, 0.05)), #1D1B1E;
     box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.3);
-    width: 70%;
+    width: 50%;
     border-radius: 5px;
     margin-top: 20px;
   }
@@ -61,7 +55,7 @@ async function login() {
   .form {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
     padding: 30px 0 30px 0;
   }
 
@@ -81,14 +75,7 @@ async function login() {
     background: #FFBA32;
     border: 1px solid black;
     border-radius: 10px;
-    width: 30%;
-  }
-
-  .buttonSecondary {
-    color: #FFBA32;
-    border: none;
-    background: none;
-    width: 50%;
+    width: 100%;
   }
 
   .buttonPrimary:hover {
@@ -96,36 +83,26 @@ async function login() {
     color: #FFBA32;
   }
 
-  .buttonSecondary:hover{
-    color: #CDC5BD;
-  }
-
   .input {
     background: none;
     width: 100%;
-    max-width: 300px;
     box-sizing: border-box;
     outline: none;
     padding: 10px;
     border: 1px solid #CDC5BD;
-    margin-bottom: 15px;
+    margin: 15px 0;
     border-radius: 5px;
     color: #CDC5BD;
   }
 
-  .floatingLabel {
-    position: absolute;
-    pointer-events: none;
-    left: 10px;
-    color: #CDC5BD;
-    font-size: 10px;
-    transition: 0.2s;
-    padding: 0 5px;
-    background: linear-gradient(0deg, rgba(211, 187, 255, 0.05), rgba(211, 187, 255, 0.05)), #1D1B1E;
+
+  h1, p{
+    color: #EAE1D9;
   }
 
-  h1 {
-    color: #EAE1D9;
+  p {
+    font-size: 13px;
+    line-height: 25px;
   }
 
 </style>
