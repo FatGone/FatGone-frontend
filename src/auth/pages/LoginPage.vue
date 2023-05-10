@@ -18,7 +18,7 @@ async function login() {
       <div class="content w100 itemsCenter" style="margin-top: 50px">
         <h1 class="flex">Logowanie</h1>
         <div class="formWrapper">
-            <form class="form">
+            <form class="form" @submit.prevent="">
               <input class="input" v-model="email"/>
               <label class="floatingLabel" style="top: 20px;">Adres e-mail</label>
               <input class="input" type="password" v-model="password"/>
