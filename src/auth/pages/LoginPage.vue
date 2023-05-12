@@ -8,7 +8,6 @@ const password = ref('');
 const error = ref('');
 async function login() {
   console.log('login');
-  router.replace({ name: 'registration' });
 }
 </script>
 
@@ -31,7 +30,7 @@ async function login() {
               </div>
             </form>
         </div>
-        <div class="registration">Nie masz jeszcze konta? <a href="">Zarejestruj się!</a></div>
+        <div class="registration">Nie masz jeszcze konta? <RouterLink to="/registration/first">Zarejestruj się!</RouterLink></div>
       </div>
     </div>
     <BackgroundGirl/>
