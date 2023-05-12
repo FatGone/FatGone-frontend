@@ -9,20 +9,33 @@ const price = ref('');
 const error = ref('');
 const products = [
   {
+    id: 1,
     name: "Open",
     items: [
-      {description: "Dostęp do wszystkich objektów FATGONE"},
-      {description: "Dostęp do sekcji SPA i Wellness"},
-      {description: "Wszystkie zajęcia grupowe"},
-      {description: "Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie"},
-  ]
+      {id: 1, description: "Dostęp do wszystkich objektów FATGONE"},
+      {id: 2, description: "Dostęp do sekcji SPA i Wellness"},
+      {id: 3, description: "Wszystkie zajęcia grupowe"},
+      {id: 4, description: "Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie"},
+    ]
+  },
+  {
+    id: 2,
+    name: "Half-Open",
+    items: [
+      {id: 1, description: "Dostęp do wszystkich objektów FATGONE"},
+      {id: 2, description: "Dodatkowo płatny dostęp do sekcji SPA i Wellness"},
+      {id: 3, description: "4 zajęcia grupowe w miesiącu"},
+      {id: 4, description: "1 konsultacja z trenerem personalnym w miesiącu"},
+    ]
   }
 ]
+
 async function select() {
   console.log('onboarding');
   router.replace({ name: 'registration' });
 }
 </script>
+
 
 <template>
   <div class="wrapper h100">
@@ -31,53 +44,21 @@ async function select() {
       <div class="content w100 itemsCenter" style="margin-top: 50px">
         <h1 class="flex">Wybierz rodzaj karnetu</h1>
         <div class="flex">
-        <div class="itemWrapper">
-          <h2>Karnet</h2>
-          <h1 class="h1">
-            HALF-OPEN
-          </h1>
-          <ul>
-            <li>Dostęp do wszystkich objektów FATGONE</li>
-            <li>Dodatkowo płatny dostęp do sekcji SPA i Wellness</li>
-            <li>4 zajęcia grupowe w miesiącu</li>
-            <li>1 konsultacja z trenerem personalnym w miesiącu</li>
-          </ul>
-          <div class="footer">
-            <div class="price">{{ price }} zl<div style="color: #FFBA32">/</div>msc</div>
-            <button type="submit" class="button" @click="select()">Wybieram</button>
+          <div class="itemWrapper" v-for="product in products" :key="product.id">
+            <h2>Karnet</h2>
+            <h1 class="h1">
+              {{ product.name }}
+            </h1>
+            <ul>
+              <li v-for="item in product.items" :key="item.id">
+              {{ item.description }}</li>  
+            </ul>
+            <div class="footer">
+              <div class="price">{{ price }} zl<div style="color: #FFBA32">/</div>msc</div>
+              <button type="submit" class="button" @click="select()">Wybieram</button>
+            </div>
           </div>
         </div>
-        <div class="itemWrapper">
-          <h2>Karnet</h2>
-          <h1 class="h1">
-            OPEN
-          </h1>
-          <ul>
-            <li>Dostęp do wszystkich objektów FATGONE</li>
-            <li>Dostęp do sekcji SPA i Wellness</li>
-            <li>Wszystkie zajęcia grupowe</li>
-            <li>Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie</li>
-          </ul>
-          <div class="footer">
-            <div class="price">{{ price }} zl<div style="color: #FFBA32">/</div>msc</div>
-            <button type="submit" class="button" @click="select()">Wybieram</button>
-          </div>
-        </div>
-        </div>
-        <!-- <div class="itemWrapper">
-          <h2>Karnet</h2>
-          <h1 class="h1">
-            {{ products.map((i)=>i.name) }}
-          </h1>
-          <ul>
-            <li v-for="item in products">
-            {{ products.map((i)=>i.items.map((e)=>e.description)) }}</li>  
-          </ul>
-          <div class="footer">
-            <div class="price">{{ price }} zl<div style="color: #FFBA32">/</div>msc</div>
-            <button type="submit" class="button" @click="select()">Wybieram</button>
-          </div>
-        </div> -->
       </div>
     </div>
     <BackgroundGirl/>
@@ -115,15 +96,6 @@ li {
   display: flex;
 }
 
-.descriptionItem {
-  align-items: center;
-  padding: 5px 10px;
-}
-
-.descriptionItem p {
-  font-size: 14px;
-  padding-left: 10px;
-}
   .wrapper {
     display: flex;
     justify-content: space-evenly;
