@@ -103,7 +103,7 @@ async function confirm() {
   .buttonPrimary {
     background: #FFBA32;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 100%;
   }
 

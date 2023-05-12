@@ -23,6 +23,8 @@ async function login() {
               <label class="floatingLabel" style="top: 20px;">Adres e-mail</label>
               <input class="input" type="password" v-model="password"/>
               <label class="floatingLabel" style="top: 75px;">Password</label>
+              <input class="input" type="password" v-model="password"/>
+              <label class="floatingLabel" style="top: 75px;">Potwierdź hasło</label>
               <span>{{ error }}</span>
               <div class="buttonsWrapper">
                 <button type="submit" class="button buttonSecondary">Masz już konto? Załoguj się</button>

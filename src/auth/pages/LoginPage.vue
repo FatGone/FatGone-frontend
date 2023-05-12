@@ -8,6 +8,7 @@ const password = ref('');
 const error = ref('');
 async function login() {
   console.log('login');
+  router.replace({ name: 'registration' });
 }
 </script>
 
@@ -30,6 +31,7 @@ async function login() {
               </div>
             </form>
         </div>
+        <div class="registration">Nie masz jeszcze konta? <a href="">Zarejestruj się!</a></div>
       </div>
     </div>
     <BackgroundGirl/>
@@ -80,7 +82,7 @@ async function login() {
   .buttonPrimary {
     background: #FFBA32;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 30%;
   }
 
@@ -126,6 +128,19 @@ async function login() {
 
   h1 {
     color: #EAE1D9;
+  }
+
+  .registration, .registration > a  {
+    color: #DBC3A1;
+  }
+
+  .registration > a :hover {
+    color: #ffffff; 
+    /* //TODO doesnt work */
+  }
+
+  .registration {
+    margin-top: 20px;
   }
 
 </style>

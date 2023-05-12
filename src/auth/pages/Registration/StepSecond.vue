@@ -21,7 +21,7 @@ async function confirm() {
             <p>Na twój adres e-mail kon**********@gmail.com wysłaliśmy wiadomość z kodem weryfikacyjnym podaj go w polu poniżej żeby dokończyć rejestrację</p>
             <input class="input" v-model="verificationCode" placeholder="Kod weryfikacyjny"/>
             <span>{{ error }}</span>
-            <button type="submit" class="button buttonPrimary" @click="confirm()">Potwierdz</button>
+            <button type="submit" class="button" @click="confirm()">Potwierdz</button>
           </form>
         </div>
       </div>
@@ -69,16 +69,13 @@ async function confirm() {
     line-height: 30px;
     font-weight: 500;
     cursor: pointer;
-  }
-
-  .buttonPrimary {
     background: #FFBA32;
     border: 1px solid black;
     border-radius: 10px;
-    width: 100%;
+    width: 80%;
   }
 
-  .buttonPrimary:hover {
+  .button:hover {
     background-color: #4e4e4e;
     color: #FFBA32;
   }
