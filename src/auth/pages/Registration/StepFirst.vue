@@ -2,12 +2,20 @@
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
 import Logo from '@/common/components/Logo.vue';
 import { ref } from 'vue';
+import router from '@/router';
+
 
 const email = ref('');
 const password = ref('');
 const error = ref('');
 async function login() {
   console.log('registration');
+  // router.replace({ path: '/registration/second'});
+  router.push({path: '/registration/second'})
+  console.log(router.options)
+
+  // router.replace({ name: 'registratioStepSecond'});
+  console.log(router.options.routes.map(i => i.children?.map(i => i.path)))
 }
 </script>
 
@@ -18,16 +26,20 @@ async function login() {
       <div class="content w100 itemsCenter" style="margin-top: 50px">
         <h1 class="flex">Rejestracja</h1>
         <div class="formWrapper">
-            <form class="form">
+            <form class="form" @submit.prevent="">
               <input class="input" v-model="email"/>
               <label class="floatingLabel" style="top: 20px;">Adres e-mail</label>
               <input class="input" type="password" v-model="password"/>
               <label class="floatingLabel" style="top: 75px;">Password</label>
               <input class="input" type="password" v-model="password"/>
-              <label class="floatingLabel" style="top: 75px;">Potwierdź hasło</label>
+              <label class="floatingLabel" style="top: 125px;">Potwierdź hasło</label>
               <span>{{ error }}</span>
+              <!-- Link się zmienia ale strona nie renderuje sie -->
+              {{ $route.params.id }}
               <div class="buttonsWrapper">
-                <button type="submit" class="button buttonSecondary">Masz już konto? Załoguj się</button>
+                <div class="login">
+                  Masz już konto? <RouterLink to="/login">Załoguj się</RouterLink>
+                </div>
                 <button type="submit" class="button buttonPrimary" @click="login()">Zarejestruj się</button>
               </div>
             </form>
@@ -55,7 +67,7 @@ async function login() {
     align-items: center;
     background: linear-gradient(0deg, rgba(211, 187, 255, 0.05), rgba(211, 187, 255, 0.05)), #1D1B1E;
     box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.3);
-    width: 70%;
+    width: 75%;
     border-radius: 5px;
     margin-top: 20px;
   }
@@ -75,14 +87,14 @@ async function login() {
   .button {
     font-size: 13px;
     line-height: 25px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
   }
 
   .buttonPrimary {
     background: #FFBA32;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 40%;
   }
 
@@ -99,9 +111,6 @@ async function login() {
     color: #FFBA32;
   }
 
-  .buttonSecondary:hover{
-    color: #CDC5BD;
-  }
 
   .input {
     background: none;
@@ -134,6 +143,17 @@ async function login() {
 
   h1 {
     color: #EAE1D9;
+  }
+
+  .login, .login > a  {
+    color: #FFBA32;
+    font-size: 13px;
+    line-height: 25px;
+    font-weight: 500;
+  }
+
+  .login {
+    margin-right: 15px;
   }
 
 </style>

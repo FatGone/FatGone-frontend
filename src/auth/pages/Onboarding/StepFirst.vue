@@ -2,6 +2,8 @@
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
 import Logo from '@/common/components/Logo.vue';
 import { ref } from 'vue';
+import router from '@/router';
+
 
 const price = ref('');
 const error = ref('');
@@ -18,6 +20,7 @@ const products = [
 ]
 async function select() {
   console.log('onboarding');
+  router.replace({ name: 'registration' });
 }
 </script>
 

@@ -2,11 +2,13 @@
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
 import Logo from '@/common/components/Logo.vue';
 import { ref } from 'vue';
+import router from '@/router';
 
 const verificationCode = ref('');
 const error = ref('');
 async function confirm() {
   console.log('registration step 2');
+  router.replace({ path: '/registration/third'});
 }
 </script>
 
@@ -17,11 +19,11 @@ async function confirm() {
       <div class="content w100 itemsCenter" style="margin-top: 50px">
         <h1 class="flex">Potwierdź swój adres e-mail</h1>
         <div class="formWrapper">
-          <form class="form">
+          <form class="form" @submit.prevent="">
             <p>Na twój adres e-mail kon**********@gmail.com wysłaliśmy wiadomość z kodem weryfikacyjnym podaj go w polu poniżej żeby dokończyć rejestrację</p>
             <input class="input" v-model="verificationCode" placeholder="Kod weryfikacyjny"/>
             <span>{{ error }}</span>
-            <button type="submit" class="button" @click="confirm()">Potwierdz</button>
+            <button type="submit" class="button buttonPrimary" @click="confirm()">Potwierdz</button>
           </form>
         </div>
       </div>
@@ -69,13 +71,16 @@ async function confirm() {
     line-height: 30px;
     font-weight: 500;
     cursor: pointer;
-    background: #FFBA32;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 80%;
   }
 
-  .button:hover {
+  .buttonPrimary {
+    background: #FFBA32;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100%;
+  }
+
+  .buttonPrimary:hover {
     background-color: #4e4e4e;
     color: #FFBA32;
   }

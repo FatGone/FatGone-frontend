@@ -2,6 +2,8 @@
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
 import Logo from '@/common/components/Logo.vue';
 import { ref } from 'vue';
+import router from '@/router';
+
 
 const firstName = ref('');
 const lastName = ref('');
@@ -13,6 +15,7 @@ const city = ref('');
 const error = ref('');
 async function confirm() {
   console.log('registration step 3');
+  router.replace({ name: 'registration' });
 }
 </script>
 
