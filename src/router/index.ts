@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '@/auth/pages/LoginPage.vue'
-import RegistrationPage from '@/auth/pages/Registration/Registration.vue'
 import RegistrationStepFirst from '@/auth/pages/Registration/StepFirst.vue'
 import RegistratioStepSecond from '@/auth/pages/Registration/StepSecond.vue'
 import RegistrationStepThird from '@/auth/pages/Registration/StepThird.vue'
@@ -10,26 +9,19 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/registration/:id',
-      name: 'registration',
+      path: '/signup',
+      name: 'SignUp',
       component: RegistrationStepFirst,
-      children: [
-        {
-          path: 'first',
-          name: 'registrationStepFirst',
-          component: RegistrationStepFirst,
-        },
-        {
-          path: 'second',
-          name: 'registration',
-          component: RegistratioStepSecond,
-        },
-        {
-          path: 'third',
-          name: 'registrationStepThird',
-          component: RegistrationStepThird,
-        },
-      ]
+    },
+    {
+      path: '/signup/email_confirmation',
+      name: 'registrationStepSecond',
+      component: RegistratioStepSecond,
+    },
+    {
+      path: '/signup/personal_data',
+      name: 'registrationStepThird',
+      component: RegistrationStepThird,
     },
     {
       path: '/login',
