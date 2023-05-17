@@ -31,8 +31,7 @@ const products = [
 ]
 
 async function select() {
-  console.log('onboarding');
-  router.replace({ name: 'registration' });
+  router.push({ name: 'onboardingStepSecond' });
 }
 </script>
 

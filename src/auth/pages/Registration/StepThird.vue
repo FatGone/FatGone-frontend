@@ -14,8 +14,7 @@ const zip = ref('');
 const city = ref('');
 const error = ref('');
 async function confirm() {
-  console.log('registration step 3');
-  router.replace({ name: 'registration' });
+  router.push({ name: 'Onboarding' });
 }
 </script>
 

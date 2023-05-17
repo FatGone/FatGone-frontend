@@ -8,14 +8,8 @@ import router from '@/router';
 const email = ref('');
 const password = ref('');
 const error = ref('');
-async function login() {
-  console.log('registration');
-  // router.replace({ path: '/registration/second'});
-  router.push({ name: 'registrationStepSecond' })
-  console.log(router.options)
-
-  // router.replace({ name: 'registratioStepSecond'});
-  console.log(router.options.routes.map(i => i.children?.map(i => i.path)))
+async function signUp() {
+  router.push({ name: 'registrationStepSecond' });
 }
 </script>
 
@@ -40,7 +34,7 @@ async function login() {
               <div class="login">
                 Masz już konto? <RouterLink to="/login">Załoguj się</RouterLink>
               </div>
-              <button type="submit" class="button buttonPrimary" @click="login()">Zarejestruj się</button>
+              <button type="submit" class="button buttonPrimary" @click="signUp()">Zarejestruj się</button>
             </div>
           </form>
         </div>

@@ -7,8 +7,7 @@ import router from '@/router';
 const verificationCode = ref('');
 const error = ref('');
 async function confirm() {
-  console.log('registration step 2');
-  router.push({ name: 'RegistrationStepThird' });
+  router.push({ name: 'registrationStepThird' });
 }
 </script>
 
