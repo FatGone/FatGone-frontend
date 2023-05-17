@@ -28,8 +28,6 @@ async function signUp() {
             <input class="input" type="password" v-model="password" />
             <label class="floatingLabel" style="top: 125px;">Potwierdź hasło</label>
             <span>{{ error }}</span>
-            <!-- Link się zmienia ale strona nie renderuje sie -->
-            {{ $route.params.id }}
             <div class="buttonsWrapper">
               <div class="login">
                 Masz już konto? <RouterLink to="/login">Załoguj się</RouterLink>
