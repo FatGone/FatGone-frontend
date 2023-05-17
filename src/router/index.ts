@@ -4,7 +4,7 @@ import RegistrationPage from '@/auth/pages/Registration/Registration.vue'
 import RegistrationStepFirst from '@/auth/pages/Registration/StepFirst.vue'
 import RegistratioStepSecond from '@/auth/pages/Registration/StepSecond.vue'
 import RegistrationStepThird from '@/auth/pages/Registration/StepThird.vue'
-import OnboardingPage from '@/auth/pages/Onboarding/StepFirst.vue'
+import OnboardingPage from '@/auth/pages/Onboarding/StepSecond.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
