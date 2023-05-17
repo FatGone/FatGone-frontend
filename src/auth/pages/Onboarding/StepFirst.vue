@@ -4,7 +4,6 @@ import Logo from '@/common/components/Logo.vue';
 import { ref } from 'vue';
 import router from '@/router';
 
-
 const price = ref('');
 const error = ref('');
 const products = [

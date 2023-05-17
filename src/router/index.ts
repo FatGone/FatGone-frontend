@@ -5,6 +5,7 @@ import RegistratioStepSecond from '@/auth/pages/Registration/StepSecond.vue'
 import RegistrationStepThird from '@/auth/pages/Registration/StepThird.vue'
 import OnboardingPageFirst from '@/auth/pages/Onboarding/StepFirst.vue'
 import OnboardingPageSecond from '@/auth/pages/Onboarding/StepSecond.vue'
+import OnboardingPageThird from '@/auth/pages/Onboarding/StepThird.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/onboarding/card_data',
       name: 'onboardingStepSecond',
       component: OnboardingPageSecond,
+    },
+    {
+      path: '/onboarding/summary',
+      name: 'onboardingStepThird',
+      component: OnboardingPageThird,
     },
   ],
 })

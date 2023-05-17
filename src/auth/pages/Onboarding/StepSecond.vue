@@ -11,8 +11,7 @@ const cvv = ref('');
 const name = ref('');
 const error = ref('');
 async function confirm() {
-  console.log('registration step 3');
-  router.replace({ name: 'registration' });
+  router.push({ name: 'onboardingStepThird' });
 }
 </script>
 
@@ -23,7 +22,7 @@ async function confirm() {
       <div class="content w100 itemsCenter" style="margin-top: 50px">
         <h1 class="flex">Podaj dane karty</h1>
         <div class="formWrapper">
-          <form>
+          <form @submit.prevent="">
             <div class="flex">
               <input v-model="card"/>
               <label class="floatingLabel" style="top: 0px;">Numer karty</label>
