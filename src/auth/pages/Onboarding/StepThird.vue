@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue';
 import Logo from '@/common/components/Logo.vue';
+import Button from '@/common/components/Button.vue';
 import { ref } from 'vue';
 
 const firstName = ref('');
@@ -50,7 +51,7 @@ async function confirm() {
             <p>Do spłaty: {{ card }}</p>
             <p>Potem: {{ dateEnd }}</p>
             <div class="flex">
-              <button type="submit" class="button" @click="confirm()">Potwierdź</button>
+              <Button label="Potwierdź" variant='secondary' @click="confirm()"></Button>
             </div>
           </div>
           <div></div>
@@ -111,21 +112,5 @@ p {
 .content {
   display: flex;
   flex-direction: column;
-}
-.button {
-  font-size: 14px;
-  line-height: 30px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 10px;
-  border: 1px solid #EAE1D9;
-  border-radius: 20px;
-  width: 100%;
-  background: none;
-  color: #FFBA32;
-}
-.button:hover {
-  background-color: #4e4e4e;
-  color: #FFBA32;
 }
 </style>
