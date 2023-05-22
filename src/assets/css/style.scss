@@ -1,0 +1,25 @@
+/* local path, dont forget that ~@/ in the url */
+@font-face {
+    font-family : 'Oswald';
+    font-style  : normal;
+    src         : url('~@/assets/fonts/Oswald-VariableFont_wght.ttf') format('truetype-variations')
+}
+
+@font-face {
+    font-family : 'Acetone';
+    font-style  : normal;
+    src         : url('~@/assets/fonts/Acetone-w1gn6.ttf') format('truetype')
+}
+
+
+.font-acetone {
+    font-family : 'Acetone', sans-serif;
+}
+
+* {
+    font-family : 'Oswald', sans-serif;
+    font-size   : 1rem;
+    margin      : 0;
+    padding     : 0;
+    box-sizing  : border-box;
+}
