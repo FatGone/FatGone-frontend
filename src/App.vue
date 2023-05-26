@@ -1,8 +1,9 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <RouterView class="bg-background" />
+  <div class="min-h-screen flex flex-row">
+    <RouterView />
+  </div>
 </template>
 
