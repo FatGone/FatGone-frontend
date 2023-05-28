@@ -1,22 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
+import ClientPanel from '../client_panel/pages/ClientPanel.vue'
+import AccountPage from '../client_panel/pages/AccountPage.vue'
+import TimetablePage from '../client_panel/pages/TimetablePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: '/panel',
+      name: 'Account',
+      component: ClientPanel,
+      
+      children: [
+        {
+          path: '',
+          redirect: 'panel/account'
+        },
+        {
+          path: 'account',
+          component: AccountPage,
+        },
+        {
+          path: 'timetable',
+          component: TimetablePage,
+        }
+      ]
     },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
   ]
 })
 
