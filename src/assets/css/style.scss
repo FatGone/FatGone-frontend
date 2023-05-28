@@ -3,19 +3,19 @@
 @font-face {
     font-family : 'Oswald';
     font-style  : normal;
-    src         : url('~@/assets/fonts/Oswald-VariableFont_wght.ttf') format('truetype-variations')
+    src         : url('@/assets/fonts/Oswald-VariableFont_wght.ttf') format('truetype-variations')
 }
 
 @font-face {
     font-family : 'Acetone';
     font-style  : normal;
-    src         : url('~@/assets/fonts/Acetone-w1gn6.ttf') format('truetype')
+    src         : url('@/assets/fonts/Acetone-w1gn6.ttf') format('truetype')
 }
 
 
 
 .font-acetone {
-    font-family : 'Acetone', sans-serif;
+    font-family : 'Acetone', sans-serif !important;
 }
 
 * {
@@ -33,56 +33,56 @@
 
 $typography: (
     'display-large': (
-        font-family: 'Oswald',
+        font-family: ("Oswald", sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 57px,
         line-height: 64px,
     ),
     'display-medium': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 45px,
         line-height: 52px,
     ),
     'display-small': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 36px,
         line-height: 44px,
     ),
     'headline-large': ( 
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 32px,
         line-height: 40px,
     ),
     'headline-medium': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 28px,
         line-height: 36px,
     ),
     'headline-small': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 24px,
         line-height: 32px,
     ),
     'title-large': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 22px,
         line-height: 28px,
     ),
     'title-medium': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 500,
         font-size: 16px,
@@ -90,7 +90,7 @@ $typography: (
         letter-spacing: 0.15px,
     ),
     'title-small': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 500,
         font-size: 14px,
@@ -98,7 +98,7 @@ $typography: (
         letter-spacing: 0.1px,
     ),
     'label-large': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 500,
         font-size: 14px,
@@ -106,7 +106,7 @@ $typography: (
         letter-spacing: 0.1px,
     ),
     'label-medium': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 500,
         font-size: 12px,
@@ -114,7 +114,7 @@ $typography: (
         letter-spacing: 0.5px,
     ),
     'label-small': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 500,
         font-size: 11px,
@@ -122,7 +122,7 @@ $typography: (
         letter-spacing: 0.5px,
     ),
     'body-large': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 16px,
@@ -130,7 +130,7 @@ $typography: (
         letter-spacing: 0.5px,
     ),
     'body-medium': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 14px,
@@ -138,7 +138,7 @@ $typography: (
         letter-spacing: 0.25px,
     ),
     'body-small': (
-        font-family: 'Oswald',
+        font-family: ('Oswald', sans-serif),
         font-style: normal,
         font-weight: 400,
         font-size: 12px,
@@ -150,6 +150,17 @@ $typography: (
 @each $name,$value in $typography{
     .fg-#{$name}{
         font-family: map-get($value,font-family) !important; 
+        font-style: map-get($value,font-style);
+        font-weight: map-get($value,font-weight);
+        font-size: map-get($value,font-size);
+        line-height: map-get($value,line-height);
+        letter-spacing: map-get($value,letter-spacing);
+    }
+}
+
+@each $name,$value in $typography{
+    .fg-#{$name}-acetone{
+        font-family: 'Acetone' !important; 
         font-style: map-get($value,font-style);
         font-weight: map-get($value,font-weight);
         font-size: map-get($value,font-size);
