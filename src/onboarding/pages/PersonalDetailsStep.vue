@@ -20,7 +20,7 @@ function navigationIntent(): void {
                     <v-col cols="5" offset="2" align-self="center">
                         <Logo :width="567" />
                         <div class="d-flex flex-column align-center">
-                            <div class="text-h4 pt-16">Uzupełnij swoje dane</div>
+                            <p class="text-on-background fg-display-medium pt-16">Uzupełnij swoje dane</p>
                             <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
                                 <v-form class="px-8 pt-8">
                                     <v-row class="mt-1">
