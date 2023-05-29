@@ -8,7 +8,7 @@ import router from '@/router';
 
 function navigationIntent(): void {
 
-    router.push('/onboarding/personal-details');
+    router.push('/onboarding/card');
 }
 
 </script>
@@ -16,39 +16,79 @@ function navigationIntent(): void {
     <v-layout>
         <v-main>
             <v-container>
+                <Logo :width="567" />
                 <v-row>
-                    <v-col cols="5" offset="2" align-self="center">
-                        <Logo :width="567" />
-                        <div class="d-flex flex-column align-center">
-                            <div class="text-h4 pt-16">Wybierz rodzaj karnetu</div>
-                            <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
-                                <div class="text-h4 pt-6">Karnet</div>
-                                <div class="text-h3 pt-3">HALF-OPEN</div>
-                                <v-row class="px-8 pt-6">
-                                    <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
-                                    <div>Dostęp do wszystkich obiektów FATGONE</div>
-                                </v-row>
-                                <v-row class="px-8 pt-6">
-                                    <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
-                                    <div>Dodatkowo płatny dostęp do sekcji SPA i Wellness</div>
-                                </v-row>
-                                <v-row class="px-8 pt-6">
-                                    <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
-                                    <div>4 zajęcia grupowe w miesiącu</div>
-                                </v-row>
-                                <v-row class="px-8 pt-6">
-                                    <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
-                                    <div>1 konsultacja z trenerem personalnym w miesiącu</div>
-                                </v-row>
-                                <div class="pt-6">49 zł/msc</div>
-                                <Button class="w-100 py-2" label="Wybieram" @click="navigationIntent()"></Button>
+                    <v-col cols="9" align-self="center">
+                        <p class="pt-16 fg-display-medium text-on-background">Wybierz rodzaj karnetu</p>
+                        <v-container>
+                            <v-row>
+                                <v-col>
+                                    <v-card color="background" class="w-100 px-8 mt-8 rounded-lg">
+                                        <p class="fg-display-small text-on-surface pt-6">Karnet</p>
+                                        <p class="pt-3 text-primary fg-display-large-acetone">HALF-OPEN</p>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">Dostęp do wszystkich obiektów FATGONE
+                                            </p>
+                                        </v-row>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">Dodatkowo płatny dostęp do sekcji SPA i
+                                                Wellness</p>
+                                        </v-row>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">4 zajęcia grupowe w miesiącu</p>
+                                        </v-row>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">1 konsultacja z trenerem personalnym w
+                                                miesiącu
+                                            </p>
+                                        </v-row>
+                                        <p class="pt-6 fg-headline-medium">49 zł<span
+                                                class="pa-0 text-primary fg-headline-medium">/</span>msc</p>
+                                        <Button class="w-100 py-2 px-16 mb-8 " label="Wybieram"
+                                            @click="navigationIntent()"></Button>
 
-                            </v-card>
-                        </div>
+                                    </v-card>
+                                </v-col>
+                                <v-col class="d-flex">
+                                    <v-card color="background"
+                                        class="align-center justify-center w-100 px-8 mt-8 rounded-lg">
+                                        <p class="fg-display-small text-on-surface pt-6">Karnet</p>
+                                        <p class="pt-3 text-primary fg-display-large-acetone">OPEN</p>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">Dostęp do wszystkich obiektów FATGONE
+                                            </p>
+                                        </v-row>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">Dostęp do sekcji SPA i Wellness</p>
+                                        </v-row>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">Wszystkie zajęcia grupowe</p>
+                                        </v-row>
+                                        <v-row class="px-8 pt-6">
+                                            <v-icon class="pr-4" icon="mdi-check" color="primary"></v-icon>
+                                            <p class="text-on-surface fg-body-large">Trening przygotowany i
+                                                nadzorowany przez naszego specjalistę dostosowany do ciebie
+                                            </p>
+                                        </v-row>
+                                        <p class="pt-6 fg-headline-medium">99 zł<span
+                                                class="pa-0 text-primary fg-headline-medium">/</span>msc</p>
+                                        <Button class="w-100 py-2 px-16 mb-8 " label="Wybieram"
+                                            @click="navigationIntent()"></Button>
 
-                        <PaginationDots :step=3 />
+                                    </v-card>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                        <PaginationDots :step=4 />
                     </v-col>
-                    <v-col cols="5">
+                    <v-col cols="3">
                         <BackgroundGirl />
                     </v-col>
                 </v-row>
@@ -56,5 +96,3 @@ function navigationIntent(): void {
         </v-main>
     </v-layout>
 </template>
-
-<style></style>
