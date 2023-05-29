@@ -17,7 +17,7 @@ function navigationIntent(step: number): void {
 <template>
     <v-row class="pt-16" justify="center">
         <v-btn v-if="step != 1" @click="navigationIntent(step)" icon>
-            <v-icon class="pb-1">mdi-chevron-left</v-icon>
+            <v-icon class="pb-1" icon="mdi-chevron-left"></v-icon>
         </v-btn>
         <v-sheet v-if="step == 1" color="secondary" max-width="16" class="rounded-circle mx-2 " height="16"
             width="100%"></v-sheet>
