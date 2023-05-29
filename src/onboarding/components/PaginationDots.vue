@@ -9,7 +9,7 @@ defineProps({ step: { type: Number, required: true } })
 const routes = ['', '/onboarding/code', '/onboarding/personal-details', '/onboarding/membership-type', '/onboarding/card'];
 
 function navigationIntent(step: number): void {
-    router.push(routes[--step])
+    router.push(routes[step - 2])
 }
 
 </script>
