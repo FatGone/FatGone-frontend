@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue'
 import Logo from '@/common/components/FGLogo.vue'
-import landingPageCardIcon1 from '@/assets/svg/LandingPageCardIcon1.svg'
-import landingPageCardIcon2 from '@/assets/svg/LandingPageCardIcon2.svg'
-import landingPageCardIcon3 from '@/assets/svg/LandingPageCardIcon3.svg'
+import BenefitIcon1 from '@/assets/svg/benefit-icon-1.svg'
+import BenefitIcon2 from '@/assets/svg/benefit-icon-2.svg'
+import BenefitIcon3 from '@/assets/svg/benefit-icon-3.svg'
 import BenefitCard from '@/landing/components/BenefitCard.vue'
 import MembershipCard from '@/landing/components/MembershipCard.vue'
 import { ref } from 'vue'
@@ -11,7 +11,7 @@ import { ref } from 'vue'
 const benefits = ref([
     {
         id: 1,
-        icon: landingPageCardIcon1,
+        icon: BenefitIcon1,
         width: 94,
         height: 124,
         title: 'Podejście szyte na miarę',
@@ -19,7 +19,7 @@ const benefits = ref([
     },
     {
         id: 2,
-        icon: landingPageCardIcon2,
+        icon: BenefitIcon2,
         width: 133.5,
         height: 56.74,
         title: 'Kompleksowa oferta',
@@ -27,7 +27,7 @@ const benefits = ref([
     },
     {
         id: 3,
-        icon: landingPageCardIcon3,
+        icon: BenefitIcon3,
         width: 95.34,
         height: 131.88,
         title: 'Doświadczenie i jakość',
