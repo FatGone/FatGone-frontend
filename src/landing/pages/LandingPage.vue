@@ -68,13 +68,13 @@ const memberships = ref([
                 <!-- Landing 1 -->
                 <v-toolbar density="compact" class="bg-background">
                     <v-spacer></v-spacer>
-                    <v-btn variant="text" absolute height="40" width="219" class="fg-label-large text-none">
+                    <v-btn variant="text" height="40" width="219" class="fg-label-large text-none">
                         Nie jesteś członkiem? Dołącz teraz!
                     </v-btn>
                     <!-- <p class="fg-label-large text-none pt-2">
                         Cześć, Grzegorz!
                     </p> -->
-                    <v-btn variant="flat" absolute height="40" width="105" class="fg-label-large text-none ms-6">
+                    <v-btn variant="flat" height="40" width="105" class="fg-label-large text-none ms-10">
                         Logowanie
                     </v-btn>
                     <!-- <v-btn variant="flat" height="40" width="188" class="fg-label-large text-none ms-6">
