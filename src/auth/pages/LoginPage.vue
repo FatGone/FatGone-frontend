@@ -1,12 +1,13 @@
 <script setup lang="ts">
-// import { ref } from 'vue';
+import { ref } from 'vue';
 import Button from '@/common/components/Button.vue'
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue'
 import Logo from '@/common/components/FGLogo.vue'
 import router from '@/router'
-// const email = ref('');
-// const password = ref('');
-// const error = ref('');
+
+const email = ref('');
+const password = ref('');
+
 async function login() {
     router.push('/');
 }
@@ -33,6 +34,9 @@ async function login() {
                                 </div>
                               </v-form>
                             </v-card>
+                            <div class="mr-15 text-secondary mt-8">
+                                Nie masz jeszcze konta? <RouterLink to="/registration" class="text-primary">Zarejestruj się!</RouterLink>
+                            </div>
                         </div>
                     </v-col>
                     <v-col cols="5">
@@ -45,13 +49,7 @@ async function login() {
 </template>
 
 <style scoped>
-    h1{
-        font-weight: 400;
-        font-size: 45px;
-        line-height: 52px;
-    }
-
     .v-btn--none {
-    border: none;
-}
+        border: none;
+    }
 </style>
