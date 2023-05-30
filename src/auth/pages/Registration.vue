@@ -58,7 +58,7 @@ const confirmPassword = (value: string) => (value === password.value) || "Niepop
                             <v-text-field variant="outlined" label="Potwierdź hasło" class="pr-2 mb-2" type="password" 
                                 :rules="[confirmPassword]">
                             </v-text-field>
-                            <div class="d-flex justify-space-between align-center">
+                            <div class="d-flex justify-space-between align-center mb-4">
                                 <div class="mr-15 text-primary">
                                     Masz już konto? <RouterLink to="/login" class="text-primary">Załoguj się</RouterLink>
                                 </div>

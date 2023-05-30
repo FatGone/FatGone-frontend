@@ -31,7 +31,7 @@ async function login(): Promise<void> {
                             <v-form ref="formRef" class="px-8 pt-8" @submit.prevent>
                             <v-text-field v-model="email" variant="outlined" label="Adres e-mail" class="pr-2" :rules="[required]"></v-text-field>
                             <v-text-field v-model="password" variant="outlined" label="Password" class="pr-2" type="password" :rules="[required]"></v-text-field>
-                            <div class="d-flex justify-end align-center">
+                            <div class="d-flex justify-end align-center mb-4">
                                 <RouterLink to="/registration" class="text-primary text-decoration-none pr-8">Przypomnij hasło</RouterLink>
                                 <Button class="w-30 py-2" label="Zaloguj" @click="login"></Button>
                             </div>
