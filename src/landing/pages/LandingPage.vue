@@ -62,11 +62,10 @@ const memberships = ref([
 </script>
 
 <template>
-    <v-app>
-        <v-responsive>
+    <v-layout>
+        <v-main>
             <v-container>
-                <!-- Landing 1 -->
-                <v-toolbar density="compact" class="bg-background">
+                <v-toolbar density="compact" class="bg-background pb-16">
                     <v-spacer></v-spacer>
                     <v-btn variant="text" height="40" width="219" class="fg-label-large text-none">
                         Nie jesteś członkiem? Dołącz teraz!
@@ -81,47 +80,43 @@ const memberships = ref([
                         Przejdź do panelu klienta
                     </v-btn> -->
                 </v-toolbar>
-                <v-row no-gutters>
+                <v-row class="h-screen">
                     <v-col cols="5" offset="2" align-self="center">
-                        <div class="pb-16">
-                            <Logo :height="153" class="pb-16"/>
-                        </div>
-                        <p class="fg-headline-large text-on-background pt-16 pb-16">Twoje centrum siły, wellnessu i zdrowia</p>
-                        <div class="d-flex justify-end pt-16 pr-16">
-                            <v-icon icon="mdi-menu-down" color="primary" size="x-large" role="button" class="on-background"/>
-                        </div>
+                        <Logo :height="163" :width="567" classes="pb-16" />
+                        <p class="fg-headline-large text-on-background pt-16 pb-16">Twoje centrum siły, wellnessu i zdrowia
+                        </p>
+
                     </v-col>
-                    <v-col cols="5">
-                        <BackgroundGirl :height="831.58"/> 
-                    </v-col>
+                    <a class="bg-background" href="#why-us">
+                        <v-icon class="pb-16" icon="mdi-menu-down" color="bg-background" size="60"
+                            style="position: absolute; bottom:0px; left: 50%; transform: translateX(-50%);" />
+                    </a>
+                    <BackgroundGirl :width="750" style="position: absolute; right: 250px; bottom:0px" />
                 </v-row>
                 <!-- Landing 2 -->
-                <p class="fg-display-large text-on-background text-center my-16">Dlaczego my?</p>
-                <v-row no-gutters>
+                <p id="why-us" class="fg-display-large text-on-background text-center my-16">Dlaczego my?</p>
+                <v-row>
                     <v-col v-for="benefit in benefits" :key="benefit.id">
-                        <benefit-card :image="benefit.icon" :width="benefit.width" :height="benefit.height" :title="benefit.title" :description="benefit.description"/>
+                        <benefit-card :image="benefit.icon" :width="benefit.width" :height="benefit.height"
+                            :title="benefit.title" :description="benefit.description" />
                     </v-col>
                 </v-row>
                 <!-- Landing 3 -->
                 <p class="fg-display-large text-on-background text-center my-16">Dołącz już dziś!</p>
-                <v-row no-gutters>
-                    <v-col v-for="membership in memberships" :key="membership.id">
+                <v-row justify="center">
+                    <v-col cols="3" v-for="membership in memberships" :key="membership.id">
                         <membership-card :title="membership.title" :price="membership.price">
                             <v-list lines="one" class="py-0">
                                 <v-list-item v-for="benefit in membership.benefits" :key="benefit" class="pa-0">
                                     <template v-slot:prepend>
                                         <v-icon icon="mdi-check" color="primary" size="small"></v-icon>
                                     </template>
-                                    <p class="fg-body-large text-on-surface">{{benefit}}</p>
+                                    <p class="fg-body-large text-on-surface">{{ benefit }}</p>
                                 </v-list-item>
                             </v-list>
                         </membership-card>
                     </v-col>
                 </v-row>
-            </v-container>
-        </v-responsive>
-    </v-app>
+            </v-container></v-main>
+    </v-layout>
 </template>
-
-<style scoped>
-</style>
