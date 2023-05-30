@@ -34,23 +34,9 @@ const buttonClasses = computed(() => {
 
 
 <template>
-    <button class="bg-primary" ref="buttonHtml" :class="buttonClasses">
+    <button class="bg-primary rounded-pill fg-label-large pt-2 pb-2 pr-4 pl-4" ref="buttonHtml" :class="buttonClasses">
         <span>{{ props.label }}</span>
     </button>
 </template>
 
-<style lang="scss">
-button {
-    border-radius: 20px;
-    margin-top: 10px;
-}
-
-span {
-    font-family: Oswald-VariableFont_wght;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 10px 24px;
-}
-</style>
+<style lang="scss"></style>
