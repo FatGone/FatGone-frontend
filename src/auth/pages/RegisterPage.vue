@@ -12,7 +12,7 @@ const formRef = ref<HTMLFormElement | null>(null);
 
 async function signUp(): Promise<void> {
     const { valid } = formRef.value!.validate();
-    if(valid) {
+    if (valid) {
         router.push('/login');
     }
 }
@@ -24,7 +24,7 @@ const emailFormat = (value: string) => {
     const pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
     return pattern.test(value) || "Niepoprawny format"
 }
-const min6characters = (value: string) => (value && value.length >=6) || "Minimum 6 znaków";
+const min6characters = (value: string) => (value && value.length >= 6) || "Minimum 6 znaków";
 const minOneUppercaseCharacters = (value: string) => {
     const pattern = /(?=.*[A-Z])/;
     return pattern.test(value) || "Minimum 1 wielką literę"
@@ -50,21 +50,24 @@ const confirmPassword = (value: string) => (value === password.value) || "Niepop
                         <Logo :height="163" :width="567" />
                         <p class="text-on-background fg-display-medium pt-16">Rejestracja</p>
                         <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
-                          <v-form ref="formRef" class="px-8 pt-8" @submit.prevent>
-                            <v-text-field v-model="email" variant="outlined" label="Adres e-mail" class="pr-2 mb-2" :rules="[required, emailFormat]"></v-text-field>
-                            <v-text-field v-model="password" variant="outlined" label="Password" class="pr-2 mb-2" type="password"
-                                :rules="[required, min6characters, minOneUppercaseCharacters,minOneSpecialCharacter, minOneNumber]">
-                            </v-text-field>
-                            <v-text-field variant="outlined" label="Potwierdź hasło" class="pr-2 mb-2" type="password" 
-                                :rules="[confirmPassword]">
-                            </v-text-field>
-                            <div class="d-flex justify-space-between align-center mb-4">
-                                <div class="mr-15 text-primary">
-                                    Masz już konto? <RouterLink to="/login" class="text-primary">Załoguj się</RouterLink>
+                            <v-form ref="formRef" class="px-8 pt-8" @submit.prevent>
+                                <v-text-field v-model="email" variant="outlined" label="Adres e-mail" class="pr-2 mb-2"
+                                    :rules="[required, emailFormat]"></v-text-field>
+                                <v-text-field v-model="password" variant="outlined" label="Password" class="pr-2 mb-2"
+                                    type="password"
+                                    :rules="[required, min6characters, minOneUppercaseCharacters, minOneSpecialCharacter, minOneNumber]">
+                                </v-text-field>
+                                <v-text-field variant="outlined" label="Potwierdź hasło" class="pr-2 mb-2" type="password"
+                                    :rules="[confirmPassword]">
+                                </v-text-field>
+                                <div class="d-flex justify-space-between align-center mb-4">
+                                    <div class="mr-15 text-primary">
+                                        Masz już konto? <RouterLink to="/login" class="text-primary">Załoguj się
+                                        </RouterLink>
+                                    </div>
+                                    <Button class="w-30 py-2" label="Zarejestruj się" @click="signUp"></Button>
                                 </div>
-                                <Button class="w-30 py-2" label="Zarejestruj się" @click="signUp"></Button>
-                            </div>
-                          </v-form>
+                            </v-form>
                         </v-card>
                         <PaginationDots :step=1 />
                     </v-col>
@@ -72,5 +75,4 @@ const confirmPassword = (value: string) => (value === password.value) || "Niepop
                 </v-row>
             </v-container>
         </v-main>
-    </v-layout>
-</template>
+</v-layout></template>
