@@ -6,12 +6,66 @@ import landingPageCardIcon2 from '@/assets/svg/LandingPageCardIcon2.svg'
 import landingPageCardIcon3 from '@/assets/svg/LandingPageCardIcon3.svg'
 import BenefitCard from '@/landing/components/BenefitCard.vue'
 import MembershipCard from '@/landing/components/MembershipCard.vue'
+import { ref } from 'vue'
+
+const benefits = ref([
+    {
+        id: 1,
+        icon: landingPageCardIcon1,
+        width: 94,
+        height: 124,
+        title: 'Podejście szyte na miarę',
+        description: 'W FatGone stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
+    },
+    {
+        id: 2,
+        icon: landingPageCardIcon2,
+        width: 133.5,
+        height: 56.74,
+        title: 'Kompleksowa oferta',
+        description: 'W naszych centrach znajdziesz wszystko, czego potrzebujesz do osiągnięcia swoich celów fitness i wellness. Od nowoczesnego sprzętu na siłowni, przez różnorodne zajęcia grupowe, po strefy relaksacyjne, w tym sauny, jacuzzi i baseny.'
+    },
+    {
+        id: 3,
+        icon: landingPageCardIcon3,
+        width: 95.34,
+        height: 131.88,
+        title: 'Doświadczenie i jakość',
+        description: 'FatGone to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
+    },
+])
+
+const memberships = ref([
+    {
+        id: 1,
+        title: 'HALF-OPEN',
+        benefits: [
+            'Dostęp do wszystkich obiektów FATGONE',
+            'Dodatkowo płatny dostęp do sekcji SPA i Wellness',
+            '4 zajęcia grupowe w miesiącu',
+            '1 konsultacja z trenerem personalnym w miesiącu'
+        ],
+        price: 49
+    },
+    {
+        id: 2,
+        title: 'OPEN',
+        benefits: [
+            'Dostęp do wszystkich obiektów FATGONE',
+            'Dostęp do sekcji SPA i Wellness',
+            'Wszystkie zajęcia grupowe',
+            'Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie'
+        ],
+        price: 99
+    },
+])
 </script>
 
 <template>
     <v-app>
         <v-responsive>
             <v-container>
+                <!-- Landing 1 -->
                 <v-toolbar density="compact" class="bg-background">
                     <v-spacer></v-spacer>
                     <v-btn variant="text" absolute height="40" width="219" class="fg-label-large text-none">
@@ -41,76 +95,24 @@ import MembershipCard from '@/landing/components/MembershipCard.vue'
                         <BackgroundGirl :height="831.58"/> 
                     </v-col>
                 </v-row>
+                <!-- Landing 2 -->
                 <p class="fg-display-large text-on-background text-center my-16">Dlaczego my?</p>
                 <v-row no-gutters>
-                    <v-col>
-                        <benefit-card :image="landingPageCardIcon1" :width="94" :height="124" title="Podejście szyte na miarę" description="W FatGone stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie."></benefit-card>
-                    </v-col>
-                    <v-col>
-                        <benefit-card :image="landingPageCardIcon2" :width="133.5" :height="56.74" title="Kompleksowa oferta" description="W naszych centrach znajdziesz wszystko, czego potrzebujesz do osiągnięcia swoich celów fitness i wellness. Od nowoczesnego sprzętu na siłowni, przez różnorodne zajęcia grupowe, po strefy relaksacyjne, w tym sauny, jacuzzi i baseny."></benefit-card>
-                    </v-col>
-                    <v-col>
-                        <benefit-card :image="landingPageCardIcon3" :width="95.34" :height="131.88" title="Doświadczenie i jakość" description="FatGone to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty."></benefit-card>
+                    <v-col v-for="benefit in benefits" :key="benefit.id">
+                        <benefit-card :image="benefit.icon" :width="benefit.width" :height="benefit.height" :title="benefit.title" :description="benefit.description"></benefit-card>
                     </v-col>
                 </v-row>
+                <!-- Landing 3 -->
                 <p class="fg-display-large text-on-background text-center my-16">Dołącz już dziś!</p>
                 <v-row no-gutters>
-                    <v-col>
-                        <membership-card title="HALF-OPEN" :price="49">
+                    <v-col v-for="membership in memberships" :key="membership.id">
+                        <membership-card :title="membership.title" :price="membership.price">
                             <v-list lines="one" active-color="on-surface" class="py-0">
-                                <v-list-item class="pa-0">
+                                <v-list-item v-for="benefit in membership.benefits" :key="benefit" class="pa-0">
                                     <template v-slot:prepend>
                                         <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
                                     </template>
-                                    <p class="fg-body-large text-on-surface">Dostęp do wszystkich obiektów FATGONE</p>
-                                </v-list-item>
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">Dodatkowo płatny dostęp do sekcji SPA i Wellness</p>
-                                </v-list-item>
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">4 zajęcia grupowe w miesiącu</p>
-                                </v-list-item>
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">1 konsultacja z trenerem personalnym w miesiącu</p>
-                                </v-list-item>
-                            </v-list>
-                        </membership-card>
-                    </v-col>
-                    <v-col>
-                        <membership-card title="OPEN" :price="99">
-                            <v-list lines="one" color="on-surface" class="py-0">
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">Dostęp do wszystkich obiektów FATGONE</p>
-                                </v-list-item>
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">Dostęp do sekcji SPA i Wellness</p>
-                                </v-list-item>
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">Wszystkie zajęcia grupowe</p>
-                                </v-list-item>
-                                <v-list-item class="pa-0">
-                                    <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
-                                    </template>
-                                    <p class="fg-body-large text-on-surface">Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie</p>
+                                    <p class="fg-body-large text-on-surface">{{benefit}}</p>
                                 </v-list-item>
                             </v-list>
                         </membership-card>
@@ -122,9 +124,4 @@ import MembershipCard from '@/landing/components/MembershipCard.vue'
 </template>
 
 <style scoped>
-    h1 {
-        font-weight: 400;
-        font-size: 45px;
-        line-height: 52px;
-    }
 </style>
