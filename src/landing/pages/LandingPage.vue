@@ -91,22 +91,22 @@ const memberships = ref([
                         <v-icon class="pb-16" icon="mdi-menu-down" color="bg-background" size="60"
                             style="position: absolute; bottom:0px; left: 50%; transform: translateX(-50%);" />
                     </a>
-                    <BackgroundGirl :width="750" style="position: absolute; right: 250px; bottom:0px" />
+                    <BackgroundGirl id="girl" :width="750" style="position: absolute; bottom:0px" />
                 </v-row>
                 <!-- Landing 2 -->
                 <p id="why-us" class="fg-display-large text-on-background text-center my-16">Dlaczego my?</p>
-                <v-row>
-                    <v-col v-for="benefit in benefits" :key="benefit.id">
+                <v-row align-content="center" justify="center" class="h-screen">
+                    <v-col cols="3" lg="4" v-for="benefit in benefits" :key="benefit.id">
                         <benefit-card :image="benefit.icon" :width="benefit.width" :height="benefit.height"
                             :title="benefit.title" :description="benefit.description" />
                     </v-col>
                 </v-row>
                 <!-- Landing 3 -->
-                <p class="fg-display-large text-on-background text-center my-16">Dołącz już dziś!</p>
-                <v-row justify="center">
-                    <v-col cols="3" v-for="membership in memberships" :key="membership.id">
+                <p class="fg-display-large text-on-background text-center pt-16">Dołącz już dziś!</p>
+                <v-row class="h-screen" justify="center" align-content="center" style="margin-top:-70px">
+                    <v-col cols="3" lg="4" class="ma-0" v-for="membership in memberships" :key="membership.id">
                         <membership-card :title="membership.title" :price="membership.price">
-                            <v-list lines="one" class="py-0">
+                            <v-list lines="one" class="pa-0">
                                 <v-list-item v-for="benefit in membership.benefits" :key="benefit" class="pa-0">
                                     <template v-slot:prepend>
                                         <v-icon icon="mdi-check" color="primary" size="small"></v-icon>
@@ -117,6 +117,51 @@ const memberships = ref([
                         </membership-card>
                     </v-col>
                 </v-row>
-            </v-container></v-main>
+            </v-container>
+        </v-main>
     </v-layout>
 </template>
+
+<style scoped>
+@media only screen and (max-width : 768px) {
+    .position {
+        display: none;
+    }
+}
+
+@media only screen and (min-width : 768px) {
+    .position {
+        width: 550px !important;
+        right: 0 !important;
+    }
+}
+
+@media only screen and (min-width : 992px) {
+    .position {
+        width: 600px !important;
+        ;
+    }
+}
+
+@media only screen and (min-width : 1200px) {
+    .position {
+        width: 550px !important;
+        right: 0 !important;
+    }
+
+    #girl {
+        right: 250px !important;
+    }
+}
+
+@media only screen and (min-width : 1920px) {
+    .position {
+        width: 900px !important;
+        right: 0 !important;
+    }
+
+    #girl {
+        right: 250px !important;
+    }
+}
+</style>
