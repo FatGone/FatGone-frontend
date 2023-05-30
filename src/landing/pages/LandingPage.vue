@@ -110,7 +110,7 @@ const memberships = ref([
                             <v-list lines="one" active-color="on-surface" class="py-0">
                                 <v-list-item v-for="benefit in membership.benefits" :key="benefit" class="pa-0">
                                     <template v-slot:prepend>
-                                        <v-icon icon="mdi-check" color="primary" size="x-small"></v-icon>
+                                        <v-icon icon="mdi-check" color="primary" size="small"></v-icon>
                                     </template>
                                     <p class="fg-body-large text-on-surface">{{benefit}}</p>
                                 </v-list-item>
