@@ -88,7 +88,7 @@ const memberships = ref([
                         </div>
                         <p class="fg-headline-large text-on-background pt-16 pb-16">Twoje centrum siły, wellnessu i zdrowia</p>
                         <div class="d-flex justify-end pt-16 pr-16">
-                            <v-btn variant="text" icon="mdi-menu-down" size="large" color="bg-on-background"></v-btn>
+                            <v-icon icon="mdi-menu-down" color="primary" size="x-large" role="button" class="on-background"/>
                         </div>
                     </v-col>
                     <v-col cols="5">
@@ -99,7 +99,7 @@ const memberships = ref([
                 <p class="fg-display-large text-on-background text-center my-16">Dlaczego my?</p>
                 <v-row no-gutters>
                     <v-col v-for="benefit in benefits" :key="benefit.id">
-                        <benefit-card :image="benefit.icon" :width="benefit.width" :height="benefit.height" :title="benefit.title" :description="benefit.description"></benefit-card>
+                        <benefit-card :image="benefit.icon" :width="benefit.width" :height="benefit.height" :title="benefit.title" :description="benefit.description"/>
                     </v-col>
                 </v-row>
                 <!-- Landing 3 -->
@@ -107,7 +107,7 @@ const memberships = ref([
                 <v-row no-gutters>
                     <v-col v-for="membership in memberships" :key="membership.id">
                         <membership-card :title="membership.title" :price="membership.price">
-                            <v-list lines="one" active-color="on-surface" class="py-0">
+                            <v-list lines="one" class="py-0">
                                 <v-list-item v-for="benefit in membership.benefits" :key="benefit" class="pa-0">
                                     <template v-slot:prepend>
                                         <v-icon icon="mdi-check" color="primary" size="small"></v-icon>
