@@ -9,6 +9,7 @@ import PersonalDetailsStep from '@/onboarding/pages/PersonalDetailsStep.vue'
 import MembershipType from '@/onboarding/pages/MembershipType.vue'
 import CardStep from '@/onboarding/pages/CardStep.vue'
 import OnboardingSummary from '@/onboarding/pages/SummaryStep.vue'
+import Registration from '@/auth/pages/Registration.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: LoginPage,
+    },
+    {
+      path: '/registration',
+      name: 'Registration',
+      component: Registration,
     },
     {
       path: '/panel',

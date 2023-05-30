@@ -2,9 +2,6 @@
 <script lang="ts" setup>
 import router from '@/router';
 
-
-
-
 defineProps({ step: { type: Number, required: true } })
 const routes = ['', '/onboarding/code', '/onboarding/personal-details', '/onboarding/membership-type', '/onboarding/card'];
 

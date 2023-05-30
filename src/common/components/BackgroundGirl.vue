@@ -13,6 +13,7 @@ defineProps({ classes: String })
     .position {
         display: none;
     }
+
 }
 
 @media only screen and (min-width : 768px) {
@@ -20,6 +21,7 @@ defineProps({ classes: String })
         width: 550px !important;
         right: 0 !important;
     }
+
 }
 
 @media only screen and (min-width : 992px) {
@@ -27,11 +29,12 @@ defineProps({ classes: String })
         width: 600px !important;
         ;
     }
+
 }
 
 @media only screen and (min-width : 1200px) {
     .position {
-        width: 550px !important;
+        width: 750px !important;
         right: 0 !important;
     }
 }
