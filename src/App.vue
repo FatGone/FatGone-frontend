@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-row">
+  <div class="min-h-screen bg-background flex flex-row">
     <RouterView />
   </div>
 </template>

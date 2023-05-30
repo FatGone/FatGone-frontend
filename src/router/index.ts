@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import LoginPage from '@/auth/pages/LoginPage.vue'
+import LandingPage from '@/landing/pages/LandingPage.vue'
 import ClientPanel from '../client_panel/pages/ClientPanel.vue'
 import AccountPage from '../client_panel/pages/AccountPage.vue'
 import TimetablePage from '../client_panel/pages/TimetablePage.vue'
-import LoginPage from '@/auth/pages/LoginPage.vue'
 import CodeStep from '@/onboarding/pages/CodeStep.vue'
 import PersonalDetailsStep from '@/onboarding/pages/PersonalDetailsStep.vue'
 import MembershipType from '@/onboarding/pages/MembershipType.vue'
@@ -12,6 +12,16 @@ import OnboardingSummary from '@/onboarding/pages/SummaryStep.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '',
+      name: '',
+      component: LandingPage,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: LoginPage,
+    },
     {
       path: '/panel',
       name: 'Account',
