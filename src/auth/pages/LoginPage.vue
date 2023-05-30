@@ -13,28 +13,32 @@ import Logo from '@/common/components/FGLogo.vue'
 </script>
 <template>
     <v-layout>
-        <v-main >
+        <v-main>
             <v-container>
                 <v-row>
                     <v-col cols="5" offset="2" align-self="center">
-                    <Logo :width="567"/>
-                    <div class="d-flex flex-column align-center">
-                        <h1 class="pt-8">Logowanie</h1>
-                        <v-card class="pa-8 rounded-lg">
-                            <v-form>
+                        <Logo :width="567" />
+                        <div class="d-flex flex-column align-center">
+                            <h1 class="text-on-background fg-display-medium pt-16">Logowanie</h1>
+                            <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
+                              <v-form class="px-8 pt-8">
                                 <v-text-field label="Adres e-mail"></v-text-field>
                                 <v-text-field label="Password"></v-text-field>
-                                <Button label="Przypomnij hasło"></Button>
-                                <Button label="Zaloguj"></Button>
-                            </v-form>
-                        </v-card> 
-                    </div>
+                                <div class="d-flex justify-end">
+                                    <v-btn class="pa-0 w-30 v-btn--none" variant="outlined">
+                                        <span class="pa-0 fg-label-large text-primary">Przypomnij hasło</span>
+                                    </v-btn>
+                                    <Button class="w-30 py-2" label="Zaloguj"></Button>
+                                </div>
+                              </v-form>
+                            </v-card>
+                        </div>
                     </v-col>
                     <v-col cols="5">
-                        <BackgroundGirl/> 
+                        <BackgroundGirl />
                     </v-col>
                 </v-row>
-        </v-container>
+            </v-container>
         </v-main>
     </v-layout>
 </template>
@@ -45,4 +49,8 @@ import Logo from '@/common/components/FGLogo.vue'
         font-size: 45px;
         line-height: 52px;
     }
+
+    .v-btn--none {
+    border: none;
+}
 </style>
