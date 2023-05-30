@@ -68,7 +68,7 @@ const confirmPassword = (value: string) => (value === password.value) || "Niepop
                         </v-card>
                         <PaginationDots :step=1 />
                     </v-col>
-                    <BackgroundGirl :width="400" style="position: absolute; right: 250px; bottom:0px" />
+                    <BackgroundGirl style="position: absolute; right: 250px; bottom:0px" />
                 </v-row>
             </v-container>
         </v-main>
