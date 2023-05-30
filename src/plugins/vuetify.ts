@@ -15,7 +15,6 @@ export default createVuetify({
         darkTheme,
     }
   },
-  
   blueprint: md3,
   icons: {
     defaultSet: 'mdi',
