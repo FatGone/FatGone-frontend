@@ -201,7 +201,7 @@ const fingerprintResetSnackbar = ref(true);
         </template>
     </v-snackbar>
     <v-container class="d-flex flex-column justify-center">
-        <v-row no-gutters style="min-height: 100vh; margin-right: 156px; margin-left: 156px;" align="center">
+        <v-row no-gutters style="min-height: 100vh;" align="center">
             <v-col class="px-4">
                 <v-card class="mb-8 pa-8 bg-surface-1" variant="elevated" elevation="1">
                     <v-card-item>
