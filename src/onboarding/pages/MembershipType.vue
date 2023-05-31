@@ -41,7 +41,7 @@ function _navigationIntent(): void {
                                         <p>
                                             <VIcon class="pa-0" icon="mdi-check" color="primary"></VIcon>
                                             <span class="pa-0 pl-2 text-on-surface fg-body-large">Dostęp do wszystkich
-                                                obiektów FATGONE
+                                                obiektów AQUASPLASH
                                             </span>>
                                         </p>
                                     </VRow>
@@ -86,7 +86,7 @@ function _navigationIntent(): void {
                                         <p>
                                             <VIcon class="pa-0" icon="mdi-check" color="primary"></VIcon>
                                             <span class="pa-0 pl-2 text-on-surface fg-body-large">Dostęp do wszystkich
-                                                obiektów FATGONE
+                                                obiektów AQUASPLASH
                                             </span>
                                         </p>
                                     </VRow>

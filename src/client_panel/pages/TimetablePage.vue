@@ -22,8 +22,8 @@ const events: EventSourceInput = [
         endTime: '19:00:00',
         startRecur: '2023-05-01',
         endRecur: '2023-06-30',
-        color: '#374D2D',
-        textColor: '#D0EABF',
+        color: '#5A3D59',
+        textColor: '#FED7F9',
         display: 'block'
     },
     {
@@ -33,8 +33,8 @@ const events: EventSourceInput = [
         endTime: '18:00:00',
         startRecur: '2023-05-01',
         endRecur: '2023-06-30',
-        color: '#54442A',
-        textColor: '#F8DFBB',
+        color: '#404659',
+        textColor: '#DCE2F9',
         display: 'block'
     },
     {
@@ -44,8 +44,8 @@ const events: EventSourceInput = [
         endTime: '18:00:00',
         startRecur: '2023-05-01',
         endRecur: '2023-06-30',
-        color: '#54442A',
-        textColor: '#F8DFBB',
+        color: '#404659',
+        textColor: '#DCE2F9',
         display: 'block'
     },
     {
@@ -55,8 +55,8 @@ const events: EventSourceInput = [
         endTime: '16:00:00',
         startRecur: '2023-05-01',
         endRecur: '2023-06-30',
-        color: '#374D2D',
-        textColor: '#D0EABF',
+        color: '#5A3D59',
+        textColor: '#FED7F9',
         display: 'block'
     },
     {
@@ -66,16 +66,16 @@ const events: EventSourceInput = [
         endTime: '16:30:00',
         startRecur: '2023-05-01',
         endRecur: '2023-06-30',
-        color: '#374D2D',
-        textColor: '#D0EABF',
+        color: '#5A3D59',
+        textColor: '#FED7F9',
         display: 'block'
     },
     {
         title: "Puchar AQUASPLASH w pływaniu na 100m",
         start: '2023-05-31 10:00:00',
         end: '2023-05-31 17:30:00',
-        color: '#5F4100',
-        textColor: '#FFDEAB',
+        color: '#B2C5FF',
+        textColor: '#002C72',
         display: 'block'
     }
 ]
@@ -128,7 +128,11 @@ const calendarOptions: CalendarOptions = {
 
 <style >
 .fc .fc-button-primary {
-    background-color: #FFBA32 !important;
-    color: #422C00 !important;
+    background-color: #B2C5FF !important;
+    color: #002C72 !important;
+}
+
+.fc .fc-timegrid-col.fc-day-today {
+    background-color: #104199 !important;
 }
 </style>

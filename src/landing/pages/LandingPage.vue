@@ -18,7 +18,7 @@ const benefits = ref([
         width: 94,
         height: 124,
         title: 'Podejście szyte na miarę',
-        description: 'W FatGone stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
+        description: 'W Aquasplash stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ const benefits = ref([
         width: 95.34,
         height: 131.88,
         title: 'Doświadczenie i jakość',
-        description: 'FatGone to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
+        description: 'AquaSplash to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
     },
 ])
 
@@ -43,7 +43,7 @@ const memberships = ref([
         id: 1,
         title: 'HALF-OPEN',
         benefits: [
-            'Dostęp do wszystkich obiektów FATGONE',
+            'Dostęp do wszystkich obiektów AQUASPLASH',
             'Dodatkowo płatny dostęp do sekcji SPA i Wellness',
             '4 zajęcia grupowe w miesiącu',
             '1 konsultacja z trenerem personalnym w miesiącu'
@@ -54,7 +54,7 @@ const memberships = ref([
         id: 2,
         title: 'OPEN',
         benefits: [
-            'Dostęp do wszystkich obiektów FATGONE',
+            'Dostęp do wszystkich obiektów AQUASPLASH',
             'Dostęp do sekcji SPA i Wellness',
             'Wszystkie zajęcia grupowe',
             'Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie'
@@ -103,7 +103,7 @@ function _clientPanelNavigation() {
                 <v-row class="h-screen">
                     <v-col cols="5" offset="2" align-self="center">
                         <Logo :height="163" :width="567" classes="pb-16" />
-                        <p class="fg-headline-large text-on-background pt-16 pb-16">Twoje centrum siły, wellnessu i zdrowia
+                        <p class="fg-headline-large text-on-background pt-16 pb-16">Pływaj, relaksuj się, ciesz się
                         </p>
 
                     </v-col>
