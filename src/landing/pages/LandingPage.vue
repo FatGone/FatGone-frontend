@@ -101,7 +101,7 @@ function _clientPanelNavigation() {
                     </v-btn>
                 </v-toolbar>
                 <v-row class="h-screen">
-                    <v-col cols="5" offset="2" align-self="center">
+                    <v-col cols="5" offset="1" align-self="center">
                         <Logo :height="163" :width="567" classes="pb-16" />
                         <p class="fg-headline-large text-on-background pt-16 pb-16">Pływaj, relaksuj się, ciesz się
                         </p>
@@ -170,7 +170,7 @@ function _clientPanelNavigation() {
     }
 
     #girl {
-        right: 250px !important;
+        right: 200px !important;
     }
 }
 
