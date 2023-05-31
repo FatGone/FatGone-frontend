@@ -64,10 +64,10 @@ const emit = defineEmits(['update:modelValue']);
 
 <style scoped lang="scss">
 .bg-surface-1 {
-    background-color: mix(#FFBA32, #1D1B1E, 5%)
+    background-color: mix(#B2C5FF, #1B1B1F, 5%)
 }
 
 .bg-surface-2 {
-    background-color: mix(#FFBA32, #1D1B1E, 8%)
+    background-color: mix(#B2C5FF, #1B1B1F, 8%)
 }
 </style>
