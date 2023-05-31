@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, watch, } from 'vue';
-import type { CarnetType } from './CarnetCardSmall.vue';
 import CarnetCardSmallVue from './CarnetCardSmall.vue';
 
 const carnetTypes = ref([
@@ -26,7 +25,7 @@ const carnetTypes = ref([
         ],
         alreadyActive: false,
     }
-] as CarnetType[])
+])
 
 const props = defineProps({
     value: {
