@@ -1,3 +1,5 @@
+import type { CardDetails } from "./CardDetails";
+
 export class AccountDetails {
     public constructor(
         public readonly id: number,
@@ -6,5 +8,6 @@ export class AccountDetails {
         public readonly phoneNumber: string,
         public readonly city: string,
         public readonly postCode: string,
+        public readonly card: CardDetails | null,
     ) { }
 }
