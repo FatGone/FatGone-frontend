@@ -3,7 +3,7 @@
 import router from '@/router';
 
 defineProps({ step: { type: Number, required: true } })
-const routes = ['', '/onboarding/code', '/onboarding/personal-details', '/onboarding/membership-type', '/onboarding/card'];
+const routes = ['/register', '/onboarding/code', '/onboarding/personal-details', '/onboarding/membership-type', '/onboarding/card'];
 
 function navigationIntent(step: number): void {
     router.push(routes[step - 2])
