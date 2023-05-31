@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import EditPersonalDetailsDrawer from '../components/EditPersonalDetailsDrawer.vue';
 import EditCardDetailsDrawer from '../components/EditCardDetailsDrawer.vue';
 import EditCarnetTypeDrawer from '../components/EditCarnetTypeDrawer.vue';
@@ -8,7 +8,10 @@ import ConfirmCarnetFreezeDialog from '../components/dialogs/ConfirmCarnetFreeze
 import ConfirmFingerprintResetDialog from '../components/dialogs/ConfirmFingerprintReset.vue';
 import ConfirmAccountDeletionDialog from '../components/dialogs/ConfirmAccountDeletion.vue';
 import ConfirmCarnetWithdrawalDialog from '../components/dialogs/ConfirmCarnetWithdrawal.vue';
+import { onMounted } from 'vue';
+import { FreezedMembershipController } from '../controllers/FreezedMemebershipController';
 
+const freezedMembershipController = new FreezedMembershipController();
 
 const name = ref('Janusz');
 const surname = ref('Kowalski');
@@ -22,7 +25,7 @@ const cardHolderName = ref('Janusz Kowalski');
 const cardExpirationDate = ref('01/2023');
 const carnetType = ref('half-open');
 const carnetCost = ref(49.99);
-const carnetNextPaymentDate = ref('24.05.2023');
+const carnetNextPaymentDate = ref('31.06.2023');
 const transactions = ref([
     {
         title: 'Obciążenie karty',
@@ -158,6 +161,29 @@ const transactions = ref([
     },
 ]);
 
+const membershipFreezed = ref(false);
+
+function freezeMembership() {
+
+    setTimeout(() => {
+        membershipFreezed.value = !membershipFreezed.value;
+        freezedMembershipController.set(membershipFreezed.value);
+    }, 1000);
+}
+
+watch(() => membershipFreezed.value, (value: boolean) => {
+    if (value) {
+        carnetNextPaymentDate.value = '30 dni od czasu mrożenia';
+        accountFreezedSnackbar.value = true;
+    }
+    else {
+        carnetNextPaymentDate.value = '31.06.2023';
+    }
+});
+
+onMounted(() => {
+    membershipFreezed.value = localStorage.getItem('accountFreezed')?.toString() === 'true';
+});
 
 const showPersonalDetailsDrawer = ref(false);
 const showCardDetailsDrawer = ref(false);
@@ -168,7 +194,7 @@ const showConfirmFingerprintResetDialog = ref(false);
 const showConfirmAccountDeletionDialog = ref(false);
 const showConfirmCarnetWithdrawalDialog = ref(false);
 const accountFreezedSnackbar = ref(false);
-const fingerprintResetSnackbar = ref(true);
+const fingerprintResetSnackbar = ref(false);
 
 </script>
 
@@ -180,8 +206,9 @@ const fingerprintResetSnackbar = ref(true);
     <edit-carnet-type-drawer :value="showCarnetDrawer" @update:model-value="(value) => showCarnetDrawer = value" />
     <transactions-drawer :value="showTransactionsDrawer" :transactions="transactions"
         @update:model-value="(value) => showTransactionsDrawer = value" />
-    <confirm-carnet-freeze-dialog :value="showConfirmCarnetFreezeDialog"
-        @update:model-value="(value) => showConfirmCarnetFreezeDialog = value"></confirm-carnet-freeze-dialog>
+    <confirm-carnet-freeze-dialog :is-already-freezed="membershipFreezed" :value="showConfirmCarnetFreezeDialog"
+        @update:model-value="(value) => showConfirmCarnetFreezeDialog = value"
+        @update:value="freezeMembership()"></confirm-carnet-freeze-dialog>
     <confirm-fingerprint-reset-dialog :value="showConfirmFingerprintResetDialog"
         @update:model-value="(value) => showConfirmFingerprintResetDialog = value"></confirm-fingerprint-reset-dialog>
     <confirm-account-deletion-dialog :value="showConfirmAccountDeletionDialog"
@@ -282,7 +309,9 @@ const fingerprintResetSnackbar = ref(true);
                 <v-card class="mb-8 pa-8 bg-surface-1" variant="elevated" elevation="4">
                     <v-card-item>
                         <v-card-title>
-                            <h2 class="text-h5 text-center fg-headline-small text-primary">Karnet</h2>
+                            <h2 class="text-h5 text-center fg-headline-small text-primary">Karnet
+                                <span class='on-surface text-h5'>{{ (membershipFreezed) ? '(Zamrożony)' : '' }} </span>
+                            </h2>
                             <v-divider class="mt-4 mb-8"></v-divider>
                         </v-card-title>
                     </v-card-item>
@@ -311,7 +340,7 @@ const fingerprintResetSnackbar = ref(true);
                         <v-btn prepend-icon="mdi-snowflake" variant="outlined"
                             class="w-100 mb-4 on-surface d-flex flex-row justify-center" height="40"
                             @click="showConfirmCarnetFreezeDialog = !showConfirmCarnetFreezeDialog">
-                            <p>Zamrożenie karnetu</p>
+                            <p>{{ (membershipFreezed) ? "Odmrożenie" : "Zamrożenie" }} karnetu</p>
                         </v-btn>
                         <v-btn prepend-icon="mdi-close" variant="outlined"
                             class="w-100 on-error-container  d-flex flex-row justify-center" height="40"
