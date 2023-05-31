@@ -1,4 +1,3 @@
-
 export class CardDetails {
     public constructor(
         public readonly cardNumber: string,

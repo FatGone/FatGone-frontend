@@ -12,7 +12,6 @@ const onboardingController = new OnboardingController();
 
 function _navigationIntent(): void {
     if (onboardingStore.membership) {
-
         onboardingController.sendConfirmMail(onboardingStore.email, onboardingStore.membership.name);
     } else {
         onboardingController.sendConfirmMail(onboardingStore.email, "HALF-OPEN");

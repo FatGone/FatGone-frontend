@@ -10,22 +10,30 @@ import ConfirmAccountDeletionDialog from '../components/dialogs/ConfirmAccountDe
 import ConfirmCarnetWithdrawalDialog from '../components/dialogs/ConfirmCarnetWithdrawal.vue';
 import { onMounted } from 'vue';
 import { FreezedMembershipController } from '../controllers/FreezedMemebershipController';
+import { useMembershipStore } from '@/membership/stores/MembershipStore';
+import type { Membership } from '@/membership/models/Membership';
+import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore';
 
 const freezedMembershipController = new FreezedMembershipController();
 
-const name = ref('Janusz');
-const surname = ref('Kowalski');
-const street = ref('Kowalska');
-const houseNumber = ref('1');
-const flatNumber = ref('1');
-const city = ref('Kowale');
-const postalCode = ref('80-180');
-const lastFourCardDigits = ref('1234');
-const cardHolderName = ref('Janusz Kowalski');
-const cardExpirationDate = ref('01/2023');
-const carnetType = ref('half-open');
-const carnetCost = ref(49.99);
 const carnetNextPaymentDate = ref('31.06.2023');
+const accountDetailsStore = useAccountDetailsStore();
+const membershipStore = useMembershipStore();
+const membership = ref(_getMembership());
+console.log('accountDetailsStore: ' + accountDetailsStore.accountDetails?.membershipTypeId);
+function _getMembership(): Membership | undefined {
+
+    if (accountDetailsStore.accountDetails?.membershipTypeId) {
+        return membershipStore.getMembershipById(accountDetailsStore.accountDetails.membershipTypeId);
+    } else {
+        return membershipStore.getMembershipById(1);
+    }
+}
+function _getNextPayment(): string {
+    const date = new Date(Date.now());
+    date.setDate(date.getDate() + 31);
+    return date.toLocaleDateString('pl-PL');
+}
 const transactions = ref([
     {
         title: 'Obciążenie karty',
@@ -241,31 +249,41 @@ const fingerprintResetSnackbar = ref(false);
                         <v-col class="pa-0 mb-8">
                             <p>
                                 <span class="fg-title-medium ">Imię: </span>
-                                <span class="fg-title-small font-weight-regular">{{ name }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.firstName }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Nazwisko: </span>
-                                <span class="fg-title-small font-weight-regular">{{ surname }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.lastName }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Ulica: </span>
-                                <span class="fg-title-small font-weight-regular">{{ street }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.street
+                                }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Numer domu: </span>
-                                <span class="fg-title-small font-weight-regular">{{ houseNumber }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.streetNumber
+                                }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Numer mieszkania: </span>
-                                <span class="fg-title-small font-weight-regular">{{ flatNumber }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.flatNumber
+                                }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Kod pocztowy: </span>
-                                <span class="fg-title-small font-weight-regular">{{ postalCode }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.postCode }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Miasto: </span>
-                                <span class="fg-title-small font-weight-regular">{{ city }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.city }}</span>
                             </p>
                         </v-col>
                         <v-btn prepend-icon="mdi-pencil" variant="outlined" class="w-100" height="40"
@@ -286,16 +304,20 @@ const fingerprintResetSnackbar = ref(false);
                         <v-col class="pa-0 mb-8">
                             <p>
                                 <span class="fg-title-medium ">Karta: </span>
-                                <span class="fg-title-small font-weight-regular">**** **** **** {{ lastFourCardDigits
+                                <span class="fg-title-small font-weight-regular">**** **** **** {{
+                                    accountDetailsStore.accountDetails?.card?.cardNumber.substring(accountDetailsStore.accountDetails?.card?.cardNumber.length
+                                        - 4)
                                 }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Data ważności: </span>
-                                <span class="fg-title-small font-weight-regular">{{ cardExpirationDate }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.card?.expiryDate }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Imię i nazwisko: </span>
-                                <span class="fg-title-small font-weight-regular">{{ cardHolderName }}</span>
+                                <span class="fg-title-small font-weight-regular">{{
+                                    accountDetailsStore.accountDetails?.card?.cardHolder }}</span>
                             </p>
                         </v-col>
                         <v-btn prepend-icon="mdi-pencil" variant="outlined" class="w-100" height="40"
@@ -321,16 +343,16 @@ const fingerprintResetSnackbar = ref(false);
                             <p>
                                 <span class="fg-title-medium ">Typ: </span>
                                 <span class="fg-title-large-acetone text-primary" style="text-transform: uppercase;">{{
-                                    carnetType
+                                    membership!.name
                                 }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Koszt: </span>
-                                <span class="fg-title-small font-weight-regular">{{ carnetCost }} zł</span>
+                                <span class="fg-title-small font-weight-regular">{{ membership!.price }} zł</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Data następnej płatności: </span>
-                                <span class="fg-title-small font-weight-regular">{{ carnetNextPaymentDate }}</span>
+                                <span class="fg-title-small font-weight-regular">{{ _getNextPayment() }}</span>
                             </p>
                         </v-col>
                         <v-btn variant="outlined" class="w-100 mb-4 d-flex flex-row justify-center" height="40"

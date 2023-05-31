@@ -9,9 +9,15 @@ import type { AccountDto } from "../models/dtos/AccountDto";
 
 export class AccountService implements AccountInterface {
     async get(): Promise<Either<AppException, Account>> {
+        console.log('[AccoundService] get()');
         const response = await AxiosClient.instance.get<AccountDto>('/account');
+        console.log('response: ' + response);
+
         if (response.status == 200) {
+
             const account: Account = AccountFactory.fromDto(response.data);
+            console.log('account: ' + account);
+
             return right(account);
         } else {
             return left(new ServerError());

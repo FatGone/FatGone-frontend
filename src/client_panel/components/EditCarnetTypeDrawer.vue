@@ -4,6 +4,7 @@ import CarnetCardSmallVue from './CarnetCardSmall.vue';
 
 const carnetTypes = ref([
     {
+        id: 1,
         name: 'half-open',
         price: 49,
         benefits: [
@@ -12,9 +13,9 @@ const carnetTypes = ref([
             "4 zajęcia grupowe w miesiącu",
             "1 konsultacja z trenerem personalnym w miesiącu",
         ],
-        alreadyActive: true,
     },
     {
+        id: 2,
         name: 'open',
         price: 99,
         benefits: [
@@ -23,7 +24,6 @@ const carnetTypes = ref([
             "Wszystkie zajęcia grupowe",
             "Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie",
         ],
-        alreadyActive: false,
     }
 ])
 
@@ -41,6 +41,7 @@ watch(() => props.value, (value: boolean) => {
 });
 
 const emit = defineEmits(['update:modelValue']);
+
 
 </script>
 <template>

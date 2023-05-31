@@ -1,13 +1,13 @@
 import { ServerError, type AppException } from "@/common/models/AppException";
 import type { OnboardingInterface } from "../interfaces/OnboardingInterface";
-import type { AccountDetailsDto } from "../models/dto/AccountDetailsDto";
+import type { AccountDetailsDto } from "../../accountDetails/models/dto/AccountDetailsDto";
 import { AxiosClient } from "@/common/utils/http_client/AxiosClient";
 import { left, right, type Either } from "fp-ts/lib/Either";
-import type { AccountDetails } from "../models/AccountDetails";
 import { AccountDetailsFactory } from "../factories/AccountDetailsFactory";
 import type { CardDetailsDto } from "../models/dto/CardDetailsDto";
 import type { CardDetails } from "../models/CardDetails";
 import { CardDetailsFactory } from "../factories/CardDetailsFactory";
+import type { AccountDetails } from "@/accountDetails/models/AccountDetails";
 
 export class OnboardingService implements OnboardingInterface {
     async patchAccountDetails(accountDetailsDto: AccountDetailsDto): Promise<Either<AppException, AccountDetails>> {

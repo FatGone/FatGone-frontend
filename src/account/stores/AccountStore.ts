@@ -17,6 +17,8 @@ export const useAccountStore = defineStore('account', {
     actions: {
         setAccount(account: Account) {
             this.account = account;
-        }
+        },
+
+
     }
 });

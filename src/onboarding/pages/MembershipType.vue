@@ -7,14 +7,18 @@ import router from '@/router';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import { ref } from 'vue';
 import { useMembershipStore } from '@/membership/stores/MembershipStore';
+import { OnboardingController } from '../controllers/OnboardingController';
 
+const onboardingController = new OnboardingController();
 const onboardingStore = useOnboardingStore();
 const membershipStore = useMembershipStore();
 
-function _updateMembershipType(typeId: number) {
+async function _updateMembershipType(typeId: number) {
     const membership = membershipStore.getMembershipById(typeId);
     if (membership) {
         onboardingStore.updateMembership(membership);
+        const accountDetailsDto = onboardingStore.formAccountDetailsDto();
+        await onboardingController.patchAccountDetails(accountDetailsDto);
         _navigationIntent();
     }
 }
