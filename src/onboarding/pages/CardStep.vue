@@ -7,10 +7,12 @@ import router from '@/router';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import { ref } from 'vue';
 import type { CardDetailsDto } from '../models/dto/CardDetailsDto';
+import { OnboardingController } from '../controllers/OnboardingController';
 
 
 
 const onboardingStore = useOnboardingStore();
+const onboardingController = new OnboardingController();
 const cardNumber = ref(onboardingStore.cardNumber);
 const cvvNumber = ref(onboardingStore.cvvCode);
 const expiryDate = ref(_convertInitExpiryDate(onboardingStore.cardExpiryDate));
@@ -37,13 +39,17 @@ async function _updateCardDetails(): Promise<void> {
         const month = expiryDate.value.slice(0, 2)
         const year = "20" + expiryDate.value.slice(3, 5);
         const validExpiryDate = year + '-' + month + '-01';
+        onboardingStore.updateExpiryDate(year + '-' + month);
+        const date = new Date(validExpiryDate);
+        const numberCvv: number = cvvNumber.value;
         const cardDetailsDto: CardDetailsDto = {
             cardNumber: cardNumber.value,
-            cvvNumber: cvvNumber.value,
-            expiryDate: validExpiryDate,
+            cvvNumber: numberCvv,
+            expiryDate: date.toISOString(),
             cardHolder: cardHolder.value,
         };
         onboardingStore.updateCardDetails(cardDetailsDto);
+        await onboardingController.patchCardDetails(cardDetailsDto);
         _navigationIntent();
     }
 }
@@ -74,7 +80,7 @@ const cardExpiryDatePattern = (expiryDate: string) => {
                     <v-col class="d-flex flex-column justify-center align-center" cols="5" offset="2">
                         <Logo :height="163" :width="567" />
                         <p class="text-on-background fg-display-medium pt-16">Podaj dane karty</p>
-                        <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
+                        <v-card color="bg-background" class="w-100 mx-16 mt-8 rounded-lg">
                             <v-form ref="form" class="px-8 pt-8" @submit.prevent>
                                 <v-row class="mt-1">
                                     <v-text-field class="mb-4" variant="outlined" prepend-inner-icon="mdi-credit-card"
