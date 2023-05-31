@@ -4,10 +4,37 @@ import Logo from '@/common/components/FGLogo.vue'
 import PaginationDots from '@/onboarding/components/PaginationDots.vue'
 import Button from '@/common/components/Button.vue'
 import { useOnboardingStore } from '../stores/OnboardingStore';
+import { OnboardingController } from '../controllers/OnboardingController';
+import router from '@/router';
 
 const onboardingStore = useOnboardingStore();
-function navigationIntent(): void {
-    // router.push('/onboarding/membership-type');
+const onboardingController = new OnboardingController();
+
+function _navigationIntent(): void {
+    if (onboardingStore.membership) {
+
+        onboardingController.sendConfirmMail(onboardingStore.email, onboardingStore.membership.name);
+    } else {
+        onboardingController.sendConfirmMail(onboardingStore.email, "HALF-OPEN");
+    }
+    router.push('/');
+}
+function _calculateTax(price: number | undefined): string {
+    if (price) {
+        const tax = Math.round(price * 0.23)
+        return tax.toString();
+    } else {
+        return '';
+    }
+
+}
+function _calculateSummary(): string {
+    const membership = onboardingStore.membership;
+    if (membership) {
+        return (membership.price + Math.round(membership.price * 0.23) + membership.registrationFee).toString();
+    } else {
+        return '';
+    }
 }
 
 </script>
@@ -37,8 +64,8 @@ function navigationIntent(): void {
                                     <v-divider class="pb-8"></v-divider>
                                     <p class="fg-body-large text-on-background">Karta: {{ onboardingStore.cardNumber }}
                                     </p>
-                                    <p class="fg-body-large text-on-background">Data waności: {{
-                                        onboardingStore.cardExpiryDate }}</p>
+                                    <p class="fg-body-large text-on-background">Data ważności: {{
+                                        onboardingStore.shortExpiryDate }}</p>
                                     <p class="fg-body-large text-on-background">Imię i nazwisko: {{
                                         onboardingStore.cardHolder }}
                                     </p>
@@ -47,18 +74,24 @@ function navigationIntent(): void {
                                     <p class="fg-headline-small text-primary pb-2">Zamówienie</p>
                                     <v-divider class="pb-8"></v-divider>
                                     <p class="pa-0 fg-body-large text-on-background">Rodzaj karnetu: <span
-                                            class="pa-0 fg-body-large-acetone text-primary">HALF-OPEN</span></p>
-                                    <p class="fg-body-large text-on-background">Koszt: 49.99zł</p>
-                                    <p class="fg-body-large text-on-background">Vat(24%): 11.50</p>
-                                    <p class="fg-body-large text-on-background">Opłata wpisowa: 89.99zł</p>
+                                            class="pa-0 fg-body-large-acetone text-primary"
+                                            style="text-transform: uppercase;">{{ onboardingStore.membership?.name }}</span>
+                                    </p>
+                                    <p class="fg-body-large text-on-background">Koszt: {{
+                                        onboardingStore.membership?.price }}zł</p>
+                                    <p class="fg-body-large text-on-background">Vat(23%): {{
+                                        _calculateTax(onboardingStore.membership?.price) }}zł</p>
+                                    <p class="fg-body-large text-on-background">Opłata wpisowa: {{
+                                        onboardingStore.membership?.registrationFee }}zł</p>
 
 
                                     <p class="fg-headline-small text-primary pb-2 pt-8">Podsumowanie</p>
                                     <v-divider class="pb-8"></v-divider>
-                                    <p class="fg-body-large text-on-background">Do zapłaty: 151.48zł</p>
-                                    <p class="fg-body-large text-on-background">Potem: 49.99zł/msc</p>
+                                    <p class="fg-body-large text-on-background">Do zapłaty: {{ _calculateSummary() }}zł</p>
+                                    <p class="fg-body-large text-on-background">Potem: {{ onboardingStore.membership?.price
+                                    }}zł/msc</p>
                                     <v-btn class="w-100 mt-16  fg-label-large text-on-primary" text="Potwierdź"
-                                        @click="navigationIntent()"></v-btn>
+                                        @click="_navigationIntent()"></v-btn>
                                 </v-col>
                             </v-row>
                         </v-card>

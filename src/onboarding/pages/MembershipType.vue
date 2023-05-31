@@ -6,12 +6,17 @@ import PaginationDots from '@/onboarding/components/PaginationDots.vue'
 import router from '@/router';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import { ref } from 'vue';
+import { useMembershipStore } from '@/membership/stores/MembershipStore';
 
 const onboardingStore = useOnboardingStore();
+const membershipStore = useMembershipStore();
 
 function _updateMembershipType(typeId: number) {
-    onboardingStore.updateMembershipType(typeId);
-    _navigationIntent();
+    const membership = membershipStore.getMembershipById(typeId);
+    if (membership) {
+        onboardingStore.updateMembership(membership);
+        _navigationIntent();
+    }
 }
 
 const carnetTypes = ref([

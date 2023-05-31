@@ -9,14 +9,22 @@ import { ref } from 'vue'
 
 const onboardingStore = useOnboardingStore();
 const code = ref(onboardingStore.code);
+const email = ref(onboardingStore.email);
+const error = ref('');
 
 function _navigationIntent(): void {
   router.push('/onboarding/personal-details');
 }
 function updateCode(): void {
+  error.value = '';
   if (_isFormValid(code.value)) {
-    onboardingStore.updateCode(code.value);
-    _navigationIntent();
+    if (code.value == '619741') {
+
+      onboardingStore.updateCode(code.value);
+      _navigationIntent();
+    } else {
+      error.value = 'Niepoprawny kod';
+    }
   }
 }
 const _isFormValid = function (code: string): boolean {
@@ -33,13 +41,15 @@ const _isFormValid = function (code: string): boolean {
           <v-col class="d-flex flex-column justify-center align-center" cols="5" offset="2">
             <Logo :height="163" :width="567" />
             <p class="text-on-background fg-display-medium pt-16">Potwierdź swój adres e-mail</p>
-            <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
+            <v-card color="bg-background" class="w-100 mx-16 mt-8 rounded-lg">
               <v-form class="px-8 pt-8" @submit.prevent>
                 <v-label class=" pb-2 text-wrap text-center fb-body-large"
-                  text="Na twój adres e - mail kon**********@gmail.com wysłaliśmy wiadomość z kodem weryfikacyjnym podaj go w polu poniżej żeby dokończyć rejestrację">
+                  :text='"Na twój adres e - mail " + email + " wysłaliśmy wiadomość z kodem weryfikacyjnym podaj go w polu poniżej żeby dokończyć rejestrację"'>
                 </v-label>
                 <v-text-field class="mb-2" :rules="[rules.required, rules.codeLength, rules.number]" clearable
                   variant="outlined" label="Kod weryfikacyjny" v-model="code"></v-text-field>
+                <v-label class=" pb-2 text-wrap text-center fb-body-large text-error" v-if="error"
+                  :text='error'></v-label>
                 <Button class="w-100 py-2" label="Potwierdź" @click="updateCode"></Button>
               </v-form>
             </v-card>

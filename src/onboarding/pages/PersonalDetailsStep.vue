@@ -8,7 +8,9 @@ import { ref } from 'vue';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import type { AccountDetailsDto } from '../models/dto/AccountDetailsDto';
 import type { AddressDto } from '../models/dto/AddressDto';
+import { OnboardingController } from '../controllers/OnboardingController';
 
+const onboardingController = new OnboardingController();
 const onboardingStore = useOnboardingStore();
 const name = ref(onboardingStore.firstName);
 const lastName = ref(onboardingStore.lastName);
@@ -28,25 +30,30 @@ async function _updatePersonalDetails(): Promise<void> {
 
     if (valid) {
         const accountDetailsDto: AccountDetailsDto = {
+            id: 0,
             firstName: name.value,
             lastName: lastName.value,
             phoneNumber: 'phoneNumber',
             address: street.value + streetNumber.value + '/' + flatNumber.value,
             city: city.value,
             postCode: postCode.value,
+            card: null,
         };
         const addressDto: AddressDto = {
-            address: street.value + streetNumber.value + '/' + flatNumber.value,
+            address: street.value + " " + streetNumber.value + '/' + flatNumber.value,
             street: street.value,
             streetNumber: streetNumber.value,
             flatNumber: flatNumber.value,
             city: city.value,
             postCode: postCode.value,
-
-
         }
         onboardingStore.updateAccountDetails(accountDetailsDto, addressDto);
-        _navigationIntent();
+        await onboardingController.patchAccountDetails(accountDetailsDto);
+        if (onboardingStore.membership) {
+            router.push('/onboarding/card');
+        } else {
+            _navigationIntent();
+        }
     }
 
 }
@@ -78,7 +85,7 @@ const postCodeFormat = (postCode: string) => {
                     <v-col class="d-flex flex-column justify-center align-center" cols="5" offset="2">
                         <Logo :height="163" :width="567" />
                         <p class="text-on-background fg-display-medium pt-16">Uzupełnij swoje dane</p>
-                        <v-card color="background" class="w-100 mx-16 mt-8 rounded-lg">
+                        <v-card color="bg-background" class="w-100 mx-16 mt-8 rounded-lg">
                             <v-form ref="form" class="px-8 pt-8" @submit.prevent>
                                 <v-row class="mt-1">
                                     <v-text-field variant="outlined" class="pr-2 mb-4" label="Imię"

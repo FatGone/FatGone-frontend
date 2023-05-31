@@ -2,8 +2,11 @@ import { defineStore } from "pinia";
 import type { AccountDetailsDto } from "../models/dto/AccountDetailsDto";
 import type { CardDetailsDto } from "../models/dto/CardDetailsDto";
 import type { AddressDto } from "../models/dto/AddressDto";
+import type { Membership } from "@/membership/models/Membership";
 
 interface IState {
+    membership: Membership | undefined,
+    email: string,
     code: string,
     firstName: string,
     lastName: string,
@@ -13,14 +16,16 @@ interface IState {
     flatNumber: string,
     city: string,
     postCode: string,
-    membershipTypeId: number,
     cardNumber: string,
     cardExpiryDate: string,
+    shortExpiryDate: string,
     cvvCode: number,
     cardHolder: string,
 }
 export const useOnboardingStore = defineStore('onboarding', {
     state: (): IState => ({
+        membership: undefined,
+        email: '',
         code: '',
         firstName: '',
         lastName: '',
@@ -30,9 +35,9 @@ export const useOnboardingStore = defineStore('onboarding', {
         flatNumber: '',
         city: '',
         postCode: '',
-        membershipTypeId: 0,
         cardNumber: '',
         cardExpiryDate: '',
+        shortExpiryDate: '',
         cvvCode: 0,
         cardHolder: '',
     }),
@@ -41,6 +46,16 @@ export const useOnboardingStore = defineStore('onboarding', {
 
     },
     actions: {
+        updateExpiryDate(expiryDate: string) {
+            this.shortExpiryDate = expiryDate;
+        },
+
+        updateMembership(membership: Membership) {
+            this.membership = membership;
+        },
+        updateEmail(email: string) {
+            this.email = email;
+        },
         updateCode(code: string) {
             this.code = code;
         },
@@ -54,9 +69,7 @@ export const useOnboardingStore = defineStore('onboarding', {
             this.streetNumber = addressDto.streetNumber;
             this.flatNumber = addressDto.flatNumber;
         },
-        updateMembershipType(typeId: number) {
-            this.membershipTypeId = typeId;
-        },
+
         updateCardDetails(cardDetailsDto: CardDetailsDto) {
             this.cardNumber = cardDetailsDto.cardNumber;
             this.cardExpiryDate = cardDetailsDto.expiryDate;
