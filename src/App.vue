@@ -1,14 +1,9 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <RouterView class="bg-background" id="routerView" />
+  <div class="min-h-screen bg-background flex flex-row">
+    <RouterView />
+  </div>
 </template>
 
-
-<style scoped>
-#routerView {
-  min-height: 100vh;
-}
-</style>
