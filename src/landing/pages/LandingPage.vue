@@ -10,6 +10,10 @@ import router from '@/router';
 import { ref } from 'vue'
 import { useAuthStore } from '@/auth/stores/AuthStore'
 import { useAccountStore } from '@/account/stores/AccountStore'
+import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore'
+import { AccountController } from '@/account/controllers/AccountController'
+import { right } from 'fp-ts/lib/EitherT'
+import { isRight } from 'fp-ts/lib/Either'
 
 const benefits = ref([
     {
@@ -64,7 +68,9 @@ const memberships = ref([
 ])
 
 const authStore = useAuthStore();
+const accountController = new AccountController();
 const accountStore = useAccountStore();
+const accountDetailsStore = useAccountDetailsStore();
 
 
 function _loginPageNavigation() {
@@ -73,7 +79,10 @@ function _loginPageNavigation() {
 function _registerPageNavigation() {
     router.push('/register');
 }
-function _clientPanelNavigation() {
+async function _clientPanelNavigation(): Promise<void> {
+    await accountController.get();
+
+
     router.push('/panel/account');
 }
 </script>
@@ -89,7 +98,7 @@ function _clientPanelNavigation() {
                         Nie jesteś członkiem? Dołącz teraz!
                     </v-btn>
                     <p v-if="authStore.isAuthenticated" class="fg-label-large text-none pt-2">
-                        Cześć, {{ accountStore.account?.accountDetails.firstName }}!
+                        Cześć, {{ accountDetailsStore.accountDetails?.firstName }}!
                     </p>
                     <v-btn v-if="!authStore.isAuthenticated" variant="flat" height="40" width="105"
                         class="fg-label-large text-none ms-10" @click="_loginPageNavigation">

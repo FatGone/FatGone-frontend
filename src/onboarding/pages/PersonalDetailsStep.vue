@@ -6,12 +6,11 @@ import PaginationDots from '@/onboarding/components/PaginationDots.vue'
 import router from '@/router';
 import { ref } from 'vue';
 import { useOnboardingStore } from '../stores/OnboardingStore';
-import type { AccountDetailsDto } from '../models/dto/AccountDetailsDto';
-import type { AddressDto } from '../models/dto/AddressDto';
-import { OnboardingController } from '../controllers/OnboardingController';
+import type { AccountDetailsDto } from '../../accountDetails/models/dto/AccountDetailsDto';
+import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore';
 
-const onboardingController = new OnboardingController();
 const onboardingStore = useOnboardingStore();
+const accountDetailsStore = useAccountDetailsStore();
 const name = ref(onboardingStore.firstName);
 const lastName = ref(onboardingStore.lastName);
 const street = ref(onboardingStore.street);
@@ -34,21 +33,16 @@ async function _updatePersonalDetails(): Promise<void> {
             firstName: name.value,
             lastName: lastName.value,
             phoneNumber: 'phoneNumber',
-            address: street.value + streetNumber.value + '/' + flatNumber.value,
-            city: city.value,
-            postCode: postCode.value,
-            card: null,
-        };
-        const addressDto: AddressDto = {
-            address: street.value + " " + streetNumber.value + '/' + flatNumber.value,
             street: street.value,
             streetNumber: streetNumber.value,
             flatNumber: flatNumber.value,
             city: city.value,
             postCode: postCode.value,
-        }
-        onboardingStore.updateAccountDetails(accountDetailsDto, addressDto);
-        await onboardingController.patchAccountDetails(accountDetailsDto);
+            membershipTypeId: 1,
+            card: null,
+        };
+        onboardingStore.updateAccountDetails(accountDetailsDto);
+        accountDetailsStore.setAccountDetails(accountDetailsDto);
         if (onboardingStore.membership) {
             router.push('/onboarding/card');
         } else {

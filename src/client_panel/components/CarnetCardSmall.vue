@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { AccountController } from '@/account/controllers/AccountController';
+import type { AccountDetailsDto } from '@/accountDetails/models/dto/AccountDetailsDto';
+import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore';
+import { useMembershipStore } from '@/membership/stores/MembershipStore';
+import { OnboardingController } from '@/onboarding/controllers/OnboardingController';
 import type { PropType } from 'vue';
 
 
 export type CarnetType = {
+    id: number,
     name: string;
     price: number;
     benefits: string[];
-    alreadyActive: boolean;
 }
 
 const props = defineProps({
@@ -15,6 +20,34 @@ const props = defineProps({
         required: true,
     },
 });
+
+const accountController = new AccountController();
+const onboardingController = new OnboardingController();
+const membershipStore = useMembershipStore();
+const accountDetailsStore = useAccountDetailsStore();
+
+async function _updateMembershipType(typeId: number) {
+    const membership = membershipStore.getMembershipById(typeId);
+    if (membership) {
+        const accountDetailsDto: AccountDetailsDto = {
+            id: accountDetailsStore.accountDetails?.id!,
+            firstName: accountDetailsStore.accountDetails?.firstName!,
+            lastName: accountDetailsStore.accountDetails?.lastName!,
+            phoneNumber: accountDetailsStore.accountDetails?.phoneNumber!,
+            street: accountDetailsStore.accountDetails?.street!,
+            streetNumber: accountDetailsStore.accountDetails?.streetNumber!,
+            flatNumber: accountDetailsStore.accountDetails?.flatNumber!,
+            city: accountDetailsStore.accountDetails?.city!,
+            postCode: accountDetailsStore.accountDetails?.postCode!,
+            membershipTypeId: membership.id,
+            card: accountDetailsStore.accountDetails?.card!,
+        };
+        await onboardingController.patchAccountDetails(accountDetailsDto);
+        await accountController.get();
+        accountDetailsStore.setAccountDetails(accountDetailsDto);
+
+    }
+}
 
 
 </script>
@@ -35,7 +68,9 @@ const props = defineProps({
                     </p>
                 </v-col>
                 <v-col>
-                    <v-btn height="40" class="w-100" :disabled="props.carnetType.alreadyActive">Zmień</v-btn>
+                    <v-btn height="40" class="w-100"
+                        :disabled="accountDetailsStore.accountDetails?.membershipTypeId == props.carnetType.id"
+                        @click="_updateMembershipType(props.carnetType.id)">Zmień</v-btn>
                 </v-col>
             </v-row>
         </v-col>

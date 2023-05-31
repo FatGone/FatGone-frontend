@@ -1,4 +1,5 @@
-import type { AccountDetails } from "@/onboarding/models/AccountDetails"
+import type { AccountDetails } from "@/accountDetails/models/AccountDetails";
+
 
 export class Account {
     public constructor(

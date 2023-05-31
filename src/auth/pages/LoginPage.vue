@@ -18,9 +18,6 @@ const error = ref('');
 const required = (value: string) => !!value || "Pole jest wymagane";
 
 async function login(): Promise<void> {
-
-
-
     if (email.value.length != 0 && password.value.length != 0) {
         const response = await authController.login(email.value, password.value);
         error.value = '';

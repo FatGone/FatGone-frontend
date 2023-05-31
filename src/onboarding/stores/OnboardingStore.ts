@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import type { AccountDetailsDto } from "../models/dto/AccountDetailsDto";
+
 import type { CardDetailsDto } from "../models/dto/CardDetailsDto";
-import type { AddressDto } from "../models/dto/AddressDto";
 import type { Membership } from "@/membership/models/Membership";
+import type { AccountDetailsDto } from "../../accountDetails/models/dto/AccountDetailsDto";
 
 interface IState {
     membership: Membership | undefined,
@@ -59,15 +59,15 @@ export const useOnboardingStore = defineStore('onboarding', {
         updateCode(code: string) {
             this.code = code;
         },
-        updateAccountDetails(accountDetailsDto: AccountDetailsDto, addressDto: AddressDto) {
+        updateAccountDetails(accountDetailsDto: AccountDetailsDto) {
             this.firstName = accountDetailsDto.firstName;
             this.lastName = accountDetailsDto.lastName;
-            this.address = accountDetailsDto.address;
+            this.street = accountDetailsDto.street;
+            this.streetNumber = accountDetailsDto.streetNumber;
+            this.flatNumber = accountDetailsDto.flatNumber;
             this.city = accountDetailsDto.city;
             this.postCode = accountDetailsDto.postCode;
-            this.street = addressDto.street;
-            this.streetNumber = addressDto.streetNumber;
-            this.flatNumber = addressDto.flatNumber;
+            this.address = this.street + ' ' + this.streetNumber + '/' + this.flatNumber;
         },
 
         updateCardDetails(cardDetailsDto: CardDetailsDto) {
@@ -75,6 +75,23 @@ export const useOnboardingStore = defineStore('onboarding', {
             this.cardExpiryDate = cardDetailsDto.expiryDate;
             this.cvvCode = cardDetailsDto.cvvNumber;
             this.cardHolder = cardDetailsDto.cardHolder;
+        },
+        formAccountDetailsDto(): AccountDetailsDto {
+            const accountDetailsDto: AccountDetailsDto = {
+                id: 0,
+                firstName: this.firstName,
+                lastName: this.lastName,
+                phoneNumber: 'phoneNumber',
+                street: this.street,
+                streetNumber: this.streetNumber,
+                flatNumber: this.flatNumber,
+                city: this.city,
+                postCode: this.postCode,
+                membershipTypeId: (this.membership) ? this.membership.id : 1,
+                card: null,
+            };
+            return accountDetailsDto;
+
         }
     }
 });

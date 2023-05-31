@@ -1,4 +1,4 @@
-import type { AccountDetailsDto } from "@/onboarding/models/dto/AccountDetailsDto";
+import type { AccountDetailsDto } from "@/accountDetails/models/dto/AccountDetailsDto";
 
 
 export interface AccountDto {
