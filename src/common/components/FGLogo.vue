@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import logo from '@/assets/svg/fg-logo.svg'
+import logo from '@/assets/svg/as-logo.svg'
 
 defineProps({ classes: String, width: Number, height: Number })
 </script>

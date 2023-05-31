@@ -45,6 +45,6 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .bg-surface-2 {
-    background-color: mix(#FFBA32, #1D1B1E, 8%) !important;
+    background-color: mix(#B2C5FF, #1B1B1F, 8%) !important;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RailItem from '@/common/components/RailItem.vue';
-import fgSmall from '@/assets/svg/fg-small.svg';
+import fgSmall from '@/assets/svg/as-small.svg';
 </script>
 
 <template>
@@ -11,6 +11,7 @@ import fgSmall from '@/assets/svg/fg-small.svg';
                     <v-avatar size="small" :image="fgSmall" rounded="0"></v-avatar>
                 </v-list-item>
                 <RailItem icon="mdi-account" text="Konto" navigate-to="/panel/account" />
+
                 <RailItem icon="mdi-calendar-month" text="Terminarz" navigate-to="/panel/timetable" />
             </v-list>
         </v-navigation-drawer>

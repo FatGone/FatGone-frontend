@@ -36,7 +36,7 @@ function _navigationIntent(): void {
                                         <p>
                                             <v-icon class="pa-0" icon="mdi-check" color="primary"></v-icon>
                                             <span class="pa-0 pl-2 text-on-surface fg-body-large">Dostęp do wszystkich
-                                                obiektów FATGONE
+                                                obiektów AQUASPLASH
                                             </span>>
                                         </p>
                                     </v-row>
@@ -80,7 +80,7 @@ function _navigationIntent(): void {
                                         <p>
                                             <v-icon class="pa-0" icon="mdi-check" color="primary"></v-icon>
                                             <span class="pa-0 pl-2 text-on-surface fg-body-large">Dostęp do wszystkich
-                                                obiektów FATGONE
+                                                obiektów AQUASPLASH
                                             </span>
                                         </p>
                                     </v-row>
