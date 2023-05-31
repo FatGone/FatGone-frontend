@@ -16,15 +16,15 @@ function navigationIntent(): void {
         <v-main>
             <v-container>
                 <v-row class="h-screen" align-content="center">
-                    <v-col class="d-flex flex-column justify-center align-center" cols="9">
+                    <v-col class="d-flex flex-column justify-center align-center" cols="8">
                         <Logo :height="163" :width="567" />
 
                         <p class="py-6 text-on-background fg-display-medium">Potwierdzenie zamówienia</p>
-                        <v-card color="background px-4">
-                            <v-row>
-                                <v-col>
-                                    <p class="fg-headline-small text-primary pb-2 px-8 pt-4">Dane personalne</p>
-                                    <v-divider class="pb-3"></v-divider>
+                        <v-card color="surface" class="pa-8 w-100">
+                            <v-row no-gutters>
+                                <v-col class="mr-16">
+                                    <p class="fg-headline-small text-primary pb-2 ">Dane personalne</p>
+                                    <v-divider class="pb-8"></v-divider>
                                     <p class="fg-body-large text-on-background">Imię: {{ onboardingStore.firstName }}
                                     </p>
                                     <p class="fg-body-large text-on-background">Nazwisko: {{ onboardingStore.lastName }}
@@ -33,8 +33,8 @@ function navigationIntent(): void {
                                     <p class="fg-body-large text-on-background">Kod pocztowy: {{
                                         onboardingStore.postCode }}</p>
                                     <p class="fg-body-large text-on-background">Miasto: {{ onboardingStore.city }}</p>
-                                    <p class="fg-headline-small text-primary pb-2 px-8 pt-4">Dane płatności</p>
-                                    <v-divider class="pb-3"></v-divider>
+                                    <p class="fg-headline-small text-primary pb-2 pt-8">Dane płatności</p>
+                                    <v-divider class="pb-8"></v-divider>
                                     <p class="fg-body-large text-on-background">Karta: {{ onboardingStore.cardNumber }}
                                     </p>
                                     <p class="fg-body-large text-on-background">Data waności: {{
@@ -44,19 +44,21 @@ function navigationIntent(): void {
                                     </p>
                                 </v-col>
                                 <v-col>
-                                    <p class="fg-headline-small text-primary pb-2 px-8 pt-4">Zamówienie</p>
-                                    <v-divider class="pb-3"></v-divider>
+                                    <p class="fg-headline-small text-primary pb-2">Zamówienie</p>
+                                    <v-divider class="pb-8"></v-divider>
                                     <p class="pa-0 fg-body-large text-on-background">Rodzaj karnetu: <span
                                             class="pa-0 fg-body-large-acetone text-primary">HALF-OPEN</span></p>
                                     <p class="fg-body-large text-on-background">Koszt: 49.99zł</p>
-                                    <p class="fg-body-large text-on-background">Vat(23%): 11.50</p>
+                                    <p class="fg-body-large text-on-background">Vat(24%): 11.50</p>
                                     <p class="fg-body-large text-on-background">Opłata wpisowa: 89.99zł</p>
-                                    <p class="fg-headline-small text-primary pb-2 px-8 pt-4">Podsumowanie</p>
-                                    <v-divider class="pb-3"></v-divider>
+
+
+                                    <p class="fg-headline-small text-primary pb-2 pt-8">Podsumowanie</p>
+                                    <v-divider class="pb-8"></v-divider>
                                     <p class="fg-body-large text-on-background">Do zapłaty: 151.48zł</p>
                                     <p class="fg-body-large text-on-background">Potem: 49.99zł/msc</p>
-                                    <Button class="w-100 py-2 px-16 fg-label-large text-on-primary" label="Potwierdź"
-                                        @click="navigationIntent()"></Button>
+                                    <v-btn class="w-100 mt-16  fg-label-large text-on-primary" text="Potwierdź"
+                                        @click="navigationIntent()"></v-btn>
                                 </v-col>
                             </v-row>
                         </v-card>
