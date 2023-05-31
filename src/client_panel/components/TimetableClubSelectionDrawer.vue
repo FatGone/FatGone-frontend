@@ -35,7 +35,6 @@
             <v-list-item value="kt-3" rounded="pill" class="mb-2">
                 <v-list-item-title class="fg-title-medium on-surface">ul. Inflacka 87</v-list-item-title>
             </v-list-item>
-
         </v-list>
     </v-navigation-drawer>
 </template>

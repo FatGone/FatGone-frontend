@@ -5,7 +5,7 @@ import fgSmall from '@/assets/svg/fg-small.svg';
 
 <template>
     <v-layout>
-        <v-navigation-drawer permanent rail rail-width="80" :expand-on-hover="false">
+        <v-navigation-drawer permanent rail rail-width="80" :expand-on-hover="false" :border="0" elevation="1">
             <v-list color="transparent" class="d-flex flex-column align-center">
                 <v-list-item class="d-flex justify-center align-center mb-8 mt-16" to="/">
                     <v-avatar size="small" :image="fgSmall" rounded="0"></v-avatar>
