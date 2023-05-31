@@ -6,7 +6,10 @@ import BenefitIcon2 from '@/assets/svg/benefit-icon-2.svg'
 import BenefitIcon3 from '@/assets/svg/benefit-icon-3.svg'
 import BenefitCard from '@/landing/components/BenefitCard.vue'
 import MembershipCard from '@/landing/components/MembershipCard.vue'
+import router from '@/router';
 import { ref } from 'vue'
+import { useAuthStore } from '@/auth/stores/AuthStore'
+import { useAccountStore } from '@/account/stores/AccountStore'
 
 const benefits = ref([
     {
@@ -59,6 +62,20 @@ const memberships = ref([
         price: 99
     },
 ])
+
+const authStore = useAuthStore();
+const accountStore = useAccountStore();
+
+
+function _loginPageNavigation() {
+    router.push('/login');
+}
+function _registerPageNavigation() {
+    router.push('/register');
+}
+function _clientPanelNavigation() {
+    router.push('/panel/account');
+}
 </script>
 
 <template>
@@ -67,18 +84,21 @@ const memberships = ref([
             <v-container>
                 <v-toolbar density="compact" class="bg-background pb-16">
                     <v-spacer></v-spacer>
-                    <v-btn variant="text" height="40" width="219" class="fg-label-large text-none">
+                    <v-btn v-if="!authStore.isAuthenticated" variant="text" height="40" width="219"
+                        class="fg-label-large text-none" @click="_registerPageNavigation">
                         Nie jesteś członkiem? Dołącz teraz!
                     </v-btn>
-                    <!-- <p class="fg-label-large text-none pt-2">
-                        Cześć, Grzegorz!
-                    </p> -->
-                    <v-btn variant="flat" height="40" width="105" class="fg-label-large text-none ms-10">
+                    <p v-if="authStore.isAuthenticated" class="fg-label-large text-none pt-2">
+                        Cześć, {{ accountStore.account?.accountDetails.firstName }}!
+                    </p>
+                    <v-btn v-if="!authStore.isAuthenticated" variant="flat" height="40" width="105"
+                        class="fg-label-large text-none ms-10" @click="_loginPageNavigation">
                         Logowanie
                     </v-btn>
-                    <!-- <v-btn variant="flat" height="40" width="188" class="fg-label-large text-none ms-6">
+                    <v-btn v-if="authStore.isAuthenticated" variant="flat" height="40" width="188"
+                        class="fg-label-large text-none ms-6" @click="_clientPanelNavigation">
                         Przejdź do panelu klienta
-                    </v-btn> -->
+                    </v-btn>
                 </v-toolbar>
                 <v-row class="h-screen">
                     <v-col cols="5" offset="2" align-self="center">
@@ -105,7 +125,7 @@ const memberships = ref([
                 <p class="fg-display-large text-on-background text-center pt-16">Dołącz już dziś!</p>
                 <v-row class="h-screen" justify="center" align-content="center" style="margin-top:-70px">
                     <v-col cols="3" lg="4" class="ma-0" v-for="membership in memberships" :key="membership.id">
-                        <membership-card :title="membership.title" :price="membership.price">
+                        <membership-card :id="membership.id" :title="membership.title" :price="membership.price">
                             <v-list lines="one" class="pa-0">
                                 <v-list-item v-for="benefit in membership.benefits" :key="benefit" class="pa-0">
                                     <template v-slot:prepend>
