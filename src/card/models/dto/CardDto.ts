@@ -1,5 +1,6 @@
 
-export interface CardDetailsDto {
+export interface CardDto {
+    id: number | null,
     cardNumber: string;
     cvvNumber: number;
     expiryDate: string;

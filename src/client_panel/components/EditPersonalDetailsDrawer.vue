@@ -24,35 +24,35 @@ const emit = defineEmits(['update:modelValue']);
 const accountDetailsStore = useAccountDetailsStore();
 const onboardingController = new OnboardingController();
 const onboardingStore = useOnboardingStore();
-const firstName = ref(accountDetailsStore.accountDetails?.firstName);
-const lastName = ref(accountDetailsStore.accountDetails?.lastName);
-const street = ref(accountDetailsStore.accountDetails?.street);
-const streetNumber = ref(accountDetailsStore.accountDetails?.streetNumber);
-const flatNumber = ref(accountDetailsStore.accountDetails?.flatNumber);
-const postCode = ref(accountDetailsStore.accountDetails?.postCode);
-const city = ref(accountDetailsStore.accountDetails?.city);
+const firstName = ref(accountDetailsStore.firstName);
+const lastName = ref(accountDetailsStore.lastName);
+const street = ref(accountDetailsStore.street);
+const streetNumber = ref(accountDetailsStore.streetNumber);
+const flatNumber = ref(accountDetailsStore.flatNumber);
+const postCode = ref(accountDetailsStore.postCode);
+const city = ref(accountDetailsStore.city);
 
 async function _updatePersonalDetails(): Promise<void> {
     const accountDetailsDto: AccountDetailsDto = {
-        id: accountDetailsStore.accountDetails?.id!,
+        id: accountDetailsStore.id!,
         firstName: firstName.value!,
         lastName: lastName.value!,
-        phoneNumber: '',
         street: street.value!,
         streetNumber: streetNumber.value!,
         flatNumber: flatNumber.value!,
         postCode: postCode.value!,
         city: city.value!,
-        membershipTypeId: 1,
-        card: accountDetailsStore.accountDetails?.card!,
+        card: accountDetailsStore.card!,
+        clientMembership: accountDetailsStore.clientMembership,
     };
-    accountDetailsStore.setAccountDetails(accountDetailsDto);
+    accountDetailsStore.setAccountDetailsDto(accountDetailsDto);
     onboardingStore.updateAccountDetails(accountDetailsDto);
     await onboardingController.patchAccountDetails(accountDetailsDto);
-    _hideDrawer();
+    _toggleShow();
 }
-function _hideDrawer() {
-    show.value = false;
+function _toggleShow() {
+    emit('update:modelValue', !show.value);
+    show.value = !show.value;
 }
 </script>
 <template>
@@ -85,7 +85,7 @@ function _hideDrawer() {
                 <v-divider></v-divider>
                 <div class="d-flex flex-row pt-4">
                     <v-btn class="mr-4" color="primary" @click="_updatePersonalDetails">Zapisz</v-btn>
-                    <v-btn color="primary" variant="outlined" @click="_hideDrawer">Anuluj</v-btn>
+                    <v-btn color="primary" variant="outlined" @click="_toggleShow">Anuluj</v-btn>
                 </div>
             </div>
         </div>

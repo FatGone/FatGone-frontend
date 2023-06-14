@@ -11,7 +11,7 @@ export class AccountService implements AccountInterface {
     async get(): Promise<Either<AppException, Account>> {
         console.log('[AccoundService] get()');
         const response = await AxiosClient.instance.get<AccountDto>('/account');
-        console.log('response: ' + response);
+        console.log('response: ' + response.data);
 
         if (response.status == 200) {
 
@@ -22,5 +22,8 @@ export class AccountService implements AccountInterface {
         } else {
             return left(new ServerError());
         }
+    }
+    async delete(): Promise<void> {
+        return await AxiosClient.instance.delete('/account');
     }
 }

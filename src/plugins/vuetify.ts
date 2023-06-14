@@ -10,11 +10,11 @@ import '@mdi/font/css/materialdesignicons.css'
 export default createVuetify({
   components,
   directives,
-  theme:{
-    defaultTheme: 'aquaSplashTheme',
+  theme: {
+    defaultTheme: 'darkTheme',
     themes: {
-        darkTheme,
-        aquaSplashTheme,
+      darkTheme,
+      aquaSplashTheme,
     }
   },
   blueprint: md3,

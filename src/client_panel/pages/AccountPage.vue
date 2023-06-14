@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import EditPersonalDetailsDrawer from '../components/EditPersonalDetailsDrawer.vue';
 import EditCardDetailsDrawer from '../components/EditCardDetailsDrawer.vue';
 import EditCarnetTypeDrawer from '../components/EditCarnetTypeDrawer.vue';
@@ -8,31 +8,24 @@ import ConfirmCarnetFreezeDialog from '../components/dialogs/ConfirmCarnetFreeze
 import ConfirmFingerprintResetDialog from '../components/dialogs/ConfirmFingerprintReset.vue';
 import ConfirmAccountDeletionDialog from '../components/dialogs/ConfirmAccountDeletion.vue';
 import ConfirmCarnetWithdrawalDialog from '../components/dialogs/ConfirmCarnetWithdrawal.vue';
-import { onMounted } from 'vue';
-import { FreezedMembershipController } from '../controllers/FreezedMemebershipController';
-import { useMembershipStore } from '@/membership/stores/MembershipStore';
-import type { Membership } from '@/membership/models/Membership';
 import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore';
+import type { ClientMembership } from '@/clientMembership/models/ClientMembership';
+import { OnboardingController } from '@/onboarding/controllers/OnboardingController';
+import { AccountController } from '@/account/controllers/AccountController';
+import router from '@/router';
 
-const freezedMembershipController = new FreezedMembershipController();
-
-const carnetNextPaymentDate = ref('31.06.2023');
 const accountDetailsStore = useAccountDetailsStore();
-const membershipStore = useMembershipStore();
 const membership = ref(_getMembership());
-console.log('accountDetailsStore: ' + accountDetailsStore.accountDetails?.membershipTypeId);
-function _getMembership(): Membership | undefined {
+function _getMembership(): ClientMembership | undefined {
 
-    if (accountDetailsStore.accountDetails?.membershipTypeId) {
-        return membershipStore.getMembershipById(accountDetailsStore.accountDetails.membershipTypeId);
-    } else {
-        return membershipStore.getMembershipById(1);
+    if (accountDetailsStore.clientMembership) {
+        return accountDetailsStore.clientMembership;
     }
 }
-function _getNextPayment(): string {
-    const date = new Date(Date.now());
-    date.setDate(date.getDate() + 31);
+function _convertNextPayment(nextPayment: string): string {
+    const date = new Date(nextPayment);
     return date.toLocaleDateString('pl-PL');
+
 }
 const transactions = ref([
     {
@@ -169,29 +162,37 @@ const transactions = ref([
     },
 ]);
 
-const membershipFreezed = ref(false);
 
-function freezeMembership() {
+async function freezeMembership() {
+    const onboardingController = new OnboardingController();
+    await onboardingController.freezeMembership();
+    const accountController = new AccountController();
+    await accountController.get();
+    const newMembership: ClientMembership = {
+        id: membership.value!.id,
+        freezed: !membership.value!.freezed,
+        remainingDays: membership.value!.remainingDays,
+        joinedAt: membership.value!.joinedAt,
+        nextPayment: membership.value!.nextPayment,
+        price: membership.value!.price,
+        membershipType: membership.value!.membershipType,
+    }
+    membership.value = newMembership;
+    window.location.reload();
 
-    setTimeout(() => {
-        membershipFreezed.value = !membershipFreezed.value;
-        freezedMembershipController.set(membershipFreezed.value);
-    }, 1000);
 }
 
-watch(() => membershipFreezed.value, (value: boolean) => {
-    if (value) {
-        carnetNextPaymentDate.value = '30 dni od czasu mrożenia';
-        accountFreezedSnackbar.value = true;
-    }
-    else {
-        carnetNextPaymentDate.value = '31.06.2023';
-    }
-});
 
-onMounted(() => {
-    membershipFreezed.value = localStorage.getItem('accountFreezed')?.toString() === 'true';
-});
+
+async function resetFingerprint() {
+    setTimeout(() => {
+        fingerprintResetSnackbar.value = true;
+    }, 1000);
+    const onboardingController = new OnboardingController();
+    await onboardingController.resetFingerPrint();
+}
+
+
 
 const showPersonalDetailsDrawer = ref(false);
 const showCardDetailsDrawer = ref(false);
@@ -208,21 +209,22 @@ const fingerprintResetSnackbar = ref(false);
 
 <template>
     <edit-personal-details-drawer :value="showPersonalDetailsDrawer"
-        @update:model-value="(value) => showPersonalDetailsDrawer = value" />
+        @update:model-value="(value: boolean) => showPersonalDetailsDrawer = value" />
     <edit-card-details-drawer :value="showCardDetailsDrawer"
-        @update:model-value="(value) => showCardDetailsDrawer = value" />
-    <edit-carnet-type-drawer :value="showCarnetDrawer" @update:model-value="(value) => showCarnetDrawer = value" />
+        @update:model-value="(value: boolean) => showCardDetailsDrawer = value" />
+    <edit-carnet-type-drawer :value="showCarnetDrawer" @update:model-value="(value: boolean) => showCarnetDrawer = value" />
     <transactions-drawer :value="showTransactionsDrawer" :transactions="transactions"
-        @update:model-value="(value) => showTransactionsDrawer = value" />
-    <confirm-carnet-freeze-dialog :is-already-freezed="membershipFreezed" :value="showConfirmCarnetFreezeDialog"
-        @update:model-value="(value) => showConfirmCarnetFreezeDialog = value"
+        @update:model-value="(value: boolean) => showTransactionsDrawer = value" />
+    <confirm-carnet-freeze-dialog :is-already-freezed="membership?.freezed" :value="showConfirmCarnetFreezeDialog"
+        @update:model-value="(value: boolean) => showConfirmCarnetFreezeDialog = value"
         @update:value="freezeMembership()"></confirm-carnet-freeze-dialog>
     <confirm-fingerprint-reset-dialog :value="showConfirmFingerprintResetDialog"
-        @update:model-value="(value) => showConfirmFingerprintResetDialog = value"></confirm-fingerprint-reset-dialog>
+        @update:model-value="(value: boolean) => showConfirmFingerprintResetDialog = value"
+        @confirm="resetFingerprint"></confirm-fingerprint-reset-dialog>
     <confirm-account-deletion-dialog :value="showConfirmAccountDeletionDialog"
-        @update:model-value="(value) => showConfirmAccountDeletionDialog = value"></confirm-account-deletion-dialog>
+        @update:model-value="(value: boolean) => showConfirmAccountDeletionDialog = value"></confirm-account-deletion-dialog>
     <confirm-carnet-withdrawal-dialog :value="showConfirmCarnetWithdrawalDialog"
-        @update:model-value="(value) => showConfirmCarnetWithdrawalDialog = value"></confirm-carnet-withdrawal-dialog>
+        @update:model-value="(value: boolean) => showConfirmCarnetWithdrawalDialog = value"></confirm-carnet-withdrawal-dialog>
     <v-snackbar v-model="accountFreezedSnackbar" :timeout="2000">
         Karnet został zamrożony
         <template v-slot:actions>
@@ -250,40 +252,40 @@ const fingerprintResetSnackbar = ref(false);
                             <p>
                                 <span class="fg-title-medium ">Imię: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.firstName }}</span>
+                                    accountDetailsStore.firstName }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Nazwisko: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.lastName }}</span>
+                                    accountDetailsStore.lastName }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Ulica: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.street
+                                    accountDetailsStore.street
                                 }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Numer domu: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.streetNumber
+                                    accountDetailsStore.streetNumber
                                 }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Numer mieszkania: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.flatNumber
+                                    accountDetailsStore.flatNumber
                                 }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Kod pocztowy: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.postCode }}</span>
+                                    accountDetailsStore.postCode }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Miasto: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.city }}</span>
+                                    accountDetailsStore.city }}</span>
                             </p>
                         </v-col>
                         <v-btn prepend-icon="mdi-pencil" variant="outlined" class="w-100" height="40"
@@ -305,19 +307,19 @@ const fingerprintResetSnackbar = ref(false);
                             <p>
                                 <span class="fg-title-medium ">Karta: </span>
                                 <span class="fg-title-small font-weight-regular">**** **** **** {{
-                                    accountDetailsStore.accountDetails?.card?.cardNumber.substring(accountDetailsStore.accountDetails?.card?.cardNumber.length
+                                    accountDetailsStore.card?.cardNumber.substring(accountDetailsStore.card?.cardNumber.length
                                         - 4)
                                 }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Data ważności: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.card?.expiryDate }}</span>
+                                    accountDetailsStore.card?.expiryDate }}</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Imię i nazwisko: </span>
                                 <span class="fg-title-small font-weight-regular">{{
-                                    accountDetailsStore.accountDetails?.card?.cardHolder }}</span>
+                                    accountDetailsStore.card?.cardHolder }}</span>
                             </p>
                         </v-col>
                         <v-btn prepend-icon="mdi-pencil" variant="outlined" class="w-100" height="40"
@@ -332,7 +334,8 @@ const fingerprintResetSnackbar = ref(false);
                     <v-card-item>
                         <v-card-title>
                             <h2 class="text-h5 text-center fg-headline-small text-primary">Karnet
-                                <span class='on-surface text-h5'>{{ (membershipFreezed) ? '(Zamrożony)' : '' }} </span>
+                                <span class='on-surface text-h5'>{{ (membership?.freezed) ? '(Zamrożony)' : '' }}
+                                </span>
                             </h2>
                             <v-divider class="mt-4 mb-8"></v-divider>
                         </v-card-title>
@@ -342,29 +345,41 @@ const fingerprintResetSnackbar = ref(false);
                         <v-col class="pa-0 mb-8">
                             <p>
                                 <span class="fg-title-medium ">Typ: </span>
-                                <span class="fg-title-large-acetone text-primary" style="text-transform: uppercase;">{{
-                                    membership!.name
-                                }}</span>
+                                <span v-if="membership?.membershipType.name" class="fg-title-large-acetone text-primary"
+                                    style="text-transform: uppercase;">{{
+                                        membership?.membershipType.name
+                                    }}</span>
+                                <span v-else class="fg-title-large-acetone text-primary"
+                                    style="text-transform: uppercase;">----</span>
                             </p>
                             <p>
                                 <span class="fg-title-medium ">Koszt: </span>
-                                <span class="fg-title-small font-weight-regular">{{ membership!.price }} zł</span>
+                                <span v-if="membership" class="fg-title-small font-weight-regular">{{ membership?.price
+                                }}
+                                    zł</span>
+                                <span v-else class="fg-title-small font-weight-regular"> --- zł</span>
                             </p>
                             <p>
-                                <span class="fg-title-medium ">Data następnej płatności: </span>
-                                <span class="fg-title-small font-weight-regular">{{ _getNextPayment() }}</span>
+                                <span class="fg-title-medium ">Następna płatność: </span>
+                                <span v-if="membership?.freezed" class="fg-title-small font-weight-regular">{{
+                                    membership.remainingDays
+                                }} dni po odmrożeniu karnetu</span>
+                                <span v-else-if="membership" class="fg-title-small font-weight-regular">{{
+                                    _convertNextPayment(membership.nextPayment)
+                                }}</span>
+                                <span v-else class="fg-title-small font-weight-regular"> --- </span>
                             </p>
                         </v-col>
                         <v-btn variant="outlined" class="w-100 mb-4 d-flex flex-row justify-center" height="40"
                             @click="showCarnetDrawer = !showCarnetDrawer">
                             <p>Zmień typ karnetu</p>
                         </v-btn>
-                        <v-btn prepend-icon="mdi-snowflake" variant="outlined"
+                        <v-btn :disabled="!membership" prepend-icon="mdi-snowflake" variant="outlined"
                             class="w-100 mb-4 on-surface d-flex flex-row justify-center" height="40"
                             @click="showConfirmCarnetFreezeDialog = !showConfirmCarnetFreezeDialog">
-                            <p>{{ (membershipFreezed) ? "Odmrożenie" : "Zamrożenie" }} karnetu</p>
+                            <p>{{ (membership?.freezed) ? "Odmrożenie" : "Zamrożenie" }} karnetu</p>
                         </v-btn>
-                        <v-btn prepend-icon="mdi-close" variant="outlined"
+                        <v-btn :disabled="!membership" prepend-icon="mdi-close" variant="outlined"
                             class="w-100 on-error-container  d-flex flex-row justify-center" height="40"
                             @click="showConfirmCarnetWithdrawalDialog = !showConfirmCarnetWithdrawalDialog">
                             <p>Zrezygnuj</p>

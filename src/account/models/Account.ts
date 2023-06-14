@@ -5,7 +5,7 @@ export class Account {
     public constructor(
         public readonly id: number,
         public readonly email: string,
-        public readonly accountDetails: AccountDetails,
+        public readonly accountDetails: AccountDetails | null,
     ) { }
 }
 

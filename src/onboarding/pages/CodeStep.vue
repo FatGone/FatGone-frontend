@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from '@/common/components/Button.vue'
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue'
 import Logo from '@/common/components/FGLogo.vue'
 import PaginationDots from '@/onboarding/components/PaginationDots.vue'
@@ -19,7 +18,6 @@ function updateCode(): void {
   error.value = '';
   if (_isFormValid(code.value)) {
     if (code.value == '619741') {
-
       onboardingStore.updateCode(code.value);
       _navigationIntent();
     } else {
@@ -41,8 +39,8 @@ const _isFormValid = function (code: string): boolean {
           <v-col class="d-flex flex-column justify-center align-center" cols="5" offset="2">
             <Logo :height="163" :width="567" />
             <p class="text-on-background fg-display-medium pt-16">Potwierdź swój adres e-mail</p>
-            <v-card color="bg-background" class="w-100 mx-16 mt-8 rounded-lg">
-              <v-form class="px-8 pt-8" @submit.prevent>
+            <v-card color="bg-background" class="w-100 mx-16 mt-8 rounded-lg pa-8">
+              <v-form class="" @submit.prevent>
                 <v-label class=" pb-2 text-wrap text-center fb-body-large"
                   :text='"Na twój adres e - mail " + email + " wysłaliśmy wiadomość z kodem weryfikacyjnym podaj go w polu poniżej żeby dokończyć rejestrację"'>
                 </v-label>
@@ -50,7 +48,7 @@ const _isFormValid = function (code: string): boolean {
                   variant="outlined" label="Kod weryfikacyjny" v-model="code"></v-text-field>
                 <v-label class=" pb-2 text-wrap text-center fb-body-large text-error" v-if="error"
                   :text='error'></v-label>
-                <Button class="w-100 py-2" label="Potwierdź" @click="updateCode"></Button>
+                <v-btn height="40" class="bg-primary w-100" text="Potwierdź" @click="updateCode"></v-btn>
               </v-form>
             </v-card>
             <PaginationDots :step=2 />

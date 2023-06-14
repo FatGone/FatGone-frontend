@@ -24,8 +24,6 @@ const formRef = ref<HTMLFormElement | null>(null);
 
 async function register(): Promise<void> {
     const { valid } = await formRef.value!.validate();
-
-
     if (valid) {
         error.value = '';
         const response = await authController.register(email.value, password.value, passwordConfirmation.value);
@@ -34,7 +32,7 @@ async function register(): Promise<void> {
         } else {
             onboardingStore.updateEmail(email.value);
             await accountController.get();
-            router.push('onboarding/code');
+            router.push('/onboarding/code');
         }
     }
 

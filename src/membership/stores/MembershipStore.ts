@@ -16,8 +16,8 @@ export const useMembershipStore = defineStore('membership', {
 
     },
     actions: {
-        getMembershipById(id: number): Membership | undefined {
-            return this.memberShips.find(x => x.id == id);
+        getMembershipById(id: number): Membership {
+            return this.memberShips.find(x => x.id == id)!;
         }
     }
 });

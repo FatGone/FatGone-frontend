@@ -8,7 +8,7 @@ const carnetTypes = ref([
         name: 'half-open',
         price: 49,
         benefits: [
-            "Dostęp do wszystkich obiektów AQUASPLASH",
+            "Dostęp do wszystkich obiektów FatGone",
             "Dodatkowo płatny dostęp do sekcji SPA i Wellness",
             "4 zajęcia grupowe w miesiącu",
             "1 konsultacja z trenerem personalnym w miesiącu",
@@ -19,7 +19,7 @@ const carnetTypes = ref([
         name: 'open',
         price: 99,
         benefits: [
-            "Dostęp do wszystkich obiektów AQUASPLASH",
+            "Dostęp do wszystkich obiektów FatGone",
             "Dostęp do sekcji SPA i Wellness",
             "Wszystkie zajęcia grupowe",
             "Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie",
@@ -42,6 +42,10 @@ watch(() => props.value, (value: boolean) => {
 
 const emit = defineEmits(['update:modelValue']);
 
+function _toggleShow() {
+    emit('update:modelValue', !show.value);
+    show.value = !show.value;
+}
 
 </script>
 <template>
@@ -55,7 +59,7 @@ const emit = defineEmits(['update:modelValue']);
         <div style="position: absolute; bottom: 32px; width: 100%;">
             <v-divider></v-divider>
             <div class="d-flex flex-row pt-4 ">
-                <v-btn color="primary" class="ml-4" variant="outlined">Anuluj</v-btn>
+                <v-btn color="primary" class="ml-4" variant="outlined" @click="_toggleShow">Anuluj</v-btn>
             </div>
         </div>
     </v-navigation-drawer>

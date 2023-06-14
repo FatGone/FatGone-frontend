@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import type { AuthTokenDto } from "../models/dtos/AuthTokenDto";
+import { useLocalStorage } from '@vueuse/core'
+
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        token: null as string | null,
-        expiry: null as Date | null
+        token: useLocalStorage('token', null as string | null),
+        expiry: useLocalStorage('expiry', null as Date | null)
     }),
     getters: {
         isExpired(): boolean {

@@ -2,20 +2,19 @@
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue'
 import Logo from '@/common/components/FGLogo.vue'
 import PaginationDots from '@/onboarding/components/PaginationDots.vue'
-import Button from '@/common/components/Button.vue'
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import { OnboardingController } from '../controllers/OnboardingController';
 import router from '@/router';
+import { useMembershipStore } from '@/membership/stores/MembershipStore';
 
 const onboardingStore = useOnboardingStore();
 const onboardingController = new OnboardingController();
+const membershipStore = useMembershipStore();
+const membership = membershipStore.getMembershipById(onboardingStore.membershipTypeId);
 
-function _navigationIntent(): void {
-    if (onboardingStore.membership) {
-        onboardingController.sendConfirmMail(onboardingStore.email, onboardingStore.membership.name);
-    } else {
-        onboardingController.sendConfirmMail(onboardingStore.email, "HALF-OPEN");
-    }
+async function _navigationIntent(): Promise<void> {
+    await onboardingController.setMembershipType(onboardingStore.membershipTypeId);
+    await onboardingController.sendConfirmMail(onboardingStore.email, onboardingStore.membershipTypeId);
     router.push('/');
 }
 function _calculateTax(price: number | undefined): string {
@@ -28,8 +27,9 @@ function _calculateTax(price: number | undefined): string {
 
 }
 function _calculateSummary(): string {
-    const membership = onboardingStore.membership;
-    if (membership) {
+    const membershipTypeId = onboardingStore.membershipTypeId;
+    if (membershipTypeId) {
+        const membership = membershipStore.getMembershipById(membershipTypeId);
         return (membership.price + Math.round(membership.price * 0.23) + membership.registrationFee).toString();
     } else {
         return '';
@@ -74,20 +74,20 @@ function _calculateSummary(): string {
                                     <v-divider class="pb-8"></v-divider>
                                     <p class="pa-0 fg-body-large text-on-background">Rodzaj karnetu: <span
                                             class="pa-0 fg-body-large-acetone text-primary"
-                                            style="text-transform: uppercase;">{{ onboardingStore.membership?.name }}</span>
+                                            style="text-transform: uppercase;">{{ membership.name }}</span>
                                     </p>
                                     <p class="fg-body-large text-on-background">Koszt: {{
-                                        onboardingStore.membership?.price }}zł</p>
+                                        membership.price }}zł</p>
                                     <p class="fg-body-large text-on-background">Vat(23%): {{
-                                        _calculateTax(onboardingStore.membership?.price) }}zł</p>
+                                        _calculateTax(membership.price) }}zł</p>
                                     <p class="fg-body-large text-on-background">Opłata wpisowa: {{
-                                        onboardingStore.membership?.registrationFee }}zł</p>
+                                        membership.registrationFee }}zł</p>
 
 
                                     <p class="fg-headline-small text-primary pb-2 pt-8">Podsumowanie</p>
                                     <v-divider class="pb-8"></v-divider>
                                     <p class="fg-body-large text-on-background">Do zapłaty: {{ _calculateSummary() }}zł</p>
-                                    <p class="fg-body-large text-on-background">Potem: {{ onboardingStore.membership?.price
+                                    <p class="fg-body-large text-on-background">Potem: {{ membership.price
                                     }}zł/msc</p>
                                     <v-btn class="w-100 mt-16  fg-label-large text-on-primary" text="Potwierdź"
                                         @click="_navigationIntent()"></v-btn>

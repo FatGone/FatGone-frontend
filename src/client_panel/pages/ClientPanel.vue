@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import RailItem from '@/common/components/RailItem.vue';
-import fgSmall from '@/assets/svg/as-small.svg';
+import fgSmall from '@/assets/svg/fg-small.svg';
+import RailButton from '@/common/components/RailButton.vue';
+import router from '@/router';
+import { useAuthStore } from '@/auth/stores/AuthStore';
+
+
+const authStore = useAuthStore();
+
+function signOut() {
+
+    authStore.logOut();
+    router.push('/');
+
+}
 </script>
 
 <template>
@@ -13,6 +26,7 @@ import fgSmall from '@/assets/svg/as-small.svg';
                 <RailItem icon="mdi-account" text="Konto" navigate-to="/panel/account" />
 
                 <RailItem icon="mdi-calendar-month" text="Terminarz" navigate-to="/panel/timetable" />
+                <RailButton icon="mdi-logout" text="Wyloguj" :click="signOut" />
             </v-list>
         </v-navigation-drawer>
         <v-main>

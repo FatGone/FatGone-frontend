@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { AccountController } from '@/account/controllers/AccountController';
-import type { AccountDetailsDto } from '@/accountDetails/models/dto/AccountDetailsDto';
 import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore';
 import { useMembershipStore } from '@/membership/stores/MembershipStore';
 import { OnboardingController } from '@/onboarding/controllers/OnboardingController';
@@ -21,30 +20,21 @@ const props = defineProps({
     },
 });
 
-const accountController = new AccountController();
+const accountDetailsStore = useAccountDetailsStore();
+const clientMembership = accountDetailsStore.clientMembership;
 const onboardingController = new OnboardingController();
 const membershipStore = useMembershipStore();
-const accountDetailsStore = useAccountDetailsStore();
+
 
 async function _updateMembershipType(typeId: number) {
+    console.log('typeId: ' + typeId);
     const membership = membershipStore.getMembershipById(typeId);
     if (membership) {
-        const accountDetailsDto: AccountDetailsDto = {
-            id: accountDetailsStore.accountDetails?.id!,
-            firstName: accountDetailsStore.accountDetails?.firstName!,
-            lastName: accountDetailsStore.accountDetails?.lastName!,
-            phoneNumber: accountDetailsStore.accountDetails?.phoneNumber!,
-            street: accountDetailsStore.accountDetails?.street!,
-            streetNumber: accountDetailsStore.accountDetails?.streetNumber!,
-            flatNumber: accountDetailsStore.accountDetails?.flatNumber!,
-            city: accountDetailsStore.accountDetails?.city!,
-            postCode: accountDetailsStore.accountDetails?.postCode!,
-            membershipTypeId: membership.id,
-            card: accountDetailsStore.accountDetails?.card!,
-        };
-        await onboardingController.patchAccountDetails(accountDetailsDto);
+        await onboardingController.setMembershipType(typeId);
+        const accountController = new AccountController();
         await accountController.get();
-        accountDetailsStore.setAccountDetails(accountDetailsDto);
+        window.location.reload();
+
 
     }
 }
@@ -68,8 +58,7 @@ async function _updateMembershipType(typeId: number) {
                     </p>
                 </v-col>
                 <v-col>
-                    <v-btn height="40" class="w-100"
-                        :disabled="accountDetailsStore.accountDetails?.membershipTypeId == props.carnetType.id"
+                    <v-btn height="40" class="w-100" :disabled="clientMembership?.membershipType.id == props.carnetType.id"
                         @click="_updateMembershipType(props.carnetType.id)">Zmień</v-btn>
                 </v-col>
             </v-row>

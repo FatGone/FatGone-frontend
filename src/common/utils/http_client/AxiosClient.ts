@@ -14,6 +14,7 @@ export class AxiosClient {
 
         AxiosClient._instance.interceptors.request.use((config) => {
             const authStore = useAuthStore();
+            authStore.loadFromStorage();
             if (authStore.isAuthenticated) {
                 config.headers["Authorization"] = `Bearer ${authStore.token}`;
             }

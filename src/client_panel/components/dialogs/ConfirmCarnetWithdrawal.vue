@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { AccountController } from '@/account/controllers/AccountController';
+import { OnboardingController } from '@/onboarding/controllers/OnboardingController';
 import { ref, watch } from 'vue';
 
 
@@ -16,7 +18,18 @@ watch(() => props.value, (value: boolean) => {
 });
 
 const emit = defineEmits(['update:modelValue']);
+async function cancelMembership() {
+    const onboardingController = new OnboardingController();
+    await onboardingController.cancelMembership();
+    const accountController = new AccountController();
+    await accountController.get();
+    window.location.reload();
+}
 
+function toggleDialog() {
+    dialog.value = false;
+    cancelMembership();
+}
 </script>
 
 <template>
@@ -38,7 +51,7 @@ const emit = defineEmits(['update:modelValue']);
                     <v-btn variant="text" @click="dialog = false">
                         Anuluj
                     </v-btn>
-                    <v-btn variant="text" @click="dialog = false">
+                    <v-btn variant="text" @click="toggleDialog">
                         Potwierdź
                     </v-btn>
                 </v-card-actions>

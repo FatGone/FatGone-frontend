@@ -6,10 +6,11 @@ import AccountPage from '@/client_panel/pages/AccountPage.vue'
 import TimetablePage from '@/client_panel/pages/TimetablePage.vue'
 import CodeStep from '@/onboarding/pages/CodeStep.vue'
 import PersonalDetailsStep from '@/onboarding/pages/PersonalDetailsStep.vue'
-import MembershipType from '@/onboarding/pages/MembershipType.vue'
 import CardStep from '@/onboarding/pages/CardStep.vue'
 import OnboardingSummary from '@/onboarding/pages/SummaryStep.vue'
 import RegisterPage from '@/auth/pages/RegisterPage.vue'
+import MembershipTypeStep from '@/onboarding/pages/MembershipTypeStep.vue';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -66,7 +67,7 @@ const router = createRouter({
     {
       path: '/onboarding/membership-type',
       name: 'OnboardingMembershipType',
-      component: MembershipType,
+      component: MembershipTypeStep,
     },
     {
       path: '/onboarding/card',

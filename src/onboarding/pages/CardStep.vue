@@ -6,7 +6,7 @@ import PaginationDots from '@/onboarding/components/PaginationDots.vue'
 import router from '@/router';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import { ref } from 'vue';
-import type { CardDetailsDto } from '../models/dto/CardDetailsDto';
+import type { CardDto } from '../../card/models/dto/CardDto';
 import { OnboardingController } from '../controllers/OnboardingController';
 
 
@@ -14,7 +14,7 @@ import { OnboardingController } from '../controllers/OnboardingController';
 const onboardingStore = useOnboardingStore();
 const onboardingController = new OnboardingController();
 const cardNumber = ref(onboardingStore.cardNumber);
-const cvvNumber = ref(onboardingStore.cvvCode);
+const cvvNumber = ref(onboardingStore.cvvNumber);
 const expiryDate = ref(_convertInitExpiryDate(onboardingStore.cardExpiryDate));
 const cardHolder = ref(onboardingStore.cardHolder);
 const form = ref<HTMLFormElement | null>(null);
@@ -32,8 +32,6 @@ function _navigationIntent(): void {
     router.push('/onboarding/summary');
 }
 async function _updateCardDetails(): Promise<void> {
-
-
     const { valid } = await form.value!.validate()
     if (valid) {
         const month = expiryDate.value.slice(0, 2)
@@ -42,14 +40,15 @@ async function _updateCardDetails(): Promise<void> {
         onboardingStore.updateExpiryDate(year + '-' + month);
         const date = new Date(validExpiryDate);
         const numberCvv: number = cvvNumber.value;
-        const cardDetailsDto: CardDetailsDto = {
+        const cardDto: CardDto = {
+            id: null,
             cardNumber: cardNumber.value,
             cvvNumber: numberCvv,
             expiryDate: date.toISOString(),
             cardHolder: cardHolder.value,
         };
-        onboardingStore.updateCardDetails(cardDetailsDto);
-        await onboardingController.patchCardDetails(cardDetailsDto);
+        onboardingStore.updateCardDetails(cardDto);
+        await onboardingController.patchCardDetails(cardDto);
         _navigationIntent();
     }
 }

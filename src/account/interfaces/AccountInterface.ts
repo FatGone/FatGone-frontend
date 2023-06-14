@@ -4,4 +4,5 @@ import type { Account } from "../models/Account";
 
 export interface AccountInterface {
     get(): Promise<Either<AppException, Account>>
+    delete(): Promise<void>
 }

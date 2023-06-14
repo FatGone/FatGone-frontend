@@ -1,10 +1,10 @@
 <svg width="98" height="128" viewBox="0 0 98 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M72.7455 20.3286H25.1756V6.81448C25.1756 4.15576 27.3322 2 29.9943 2H67.9267C70.5878 2 72.7455 4.15576 72.7455 6.81448V20.3286Z" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M30.6606 34.8818L21.3498 44.2692L15.2734 38.1423" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M30.6606 66.8843L21.3498 76.2717L15.2734 70.1448" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M30.6606 98.887L21.3498 108.274L15.2734 102.147" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M40.346 40.3848H81.407" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M40.346 72.3875H81.0933" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M40.346 104.391H89.1105" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
-<path d="M72.7455 12.6211H96V126H2V12.6211H25.1756" stroke="#B2C5FF" stroke-width="3.32" stroke-miterlimit="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M72.7455 20.3286H25.1756V6.81448C25.1756 4.15576 27.3322 2 29.9943 2H67.9268C70.5878 2 72.7455 4.15576 72.7455 6.81448V20.3286Z" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M30.6606 34.8818L21.3498 44.2692L15.2734 38.1423" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M30.6606 66.8843L21.3498 76.2717L15.2734 70.1448" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M30.6606 98.887L21.3498 108.274L15.2734 102.147" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M40.346 40.3848H81.407" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M40.346 72.3875H81.0933" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M40.346 104.391H89.1105" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
+<path d="M72.7455 12.6211H96V126H2V12.6211H25.1756" stroke="#FFBA32" stroke-width="3.32" stroke-miterlimit="2"/>
 </svg>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { AccountController } from '@/account/controllers/AccountController';
+import router from '@/router';
 import { ref, watch } from 'vue';
 
 
@@ -17,6 +19,14 @@ watch(() => props.value, (value: boolean) => {
 
 const emit = defineEmits(['update:modelValue']);
 
+async function deleteAccount() {
+    dialog.value = false;
+    const accountController = new AccountController();
+    await accountController.deleteAccount();
+    router.push('/');
+}
+
+
 </script>
 
 <template>
@@ -28,7 +38,7 @@ const emit = defineEmits(['update:modelValue']);
                 </v-card-title>
                 <v-card-text>
                     <p class="fg-body-medium">
-                        Usunięcie konta wiąże się z natychmiastową utratą dostępu do placówek AquaSplash oraz usunięciem
+                        Usunięcie konta wiąże się z natychmiastową utratą dostępu do placówek FatGone oraz usunięciem
                         wszelkich danych o użytkowniku w systemie. Żeby ponownie zamówić karnet, będzie potrzebna
                         rejestracja.
                     </p>
@@ -38,7 +48,7 @@ const emit = defineEmits(['update:modelValue']);
                     <v-btn variant="text" @click="dialog = false">
                         Anuluj
                     </v-btn>
-                    <v-btn variant="text" @click="dialog = false">
+                    <v-btn variant="text" @click="deleteAccount">
                         Potwierdź
                     </v-btn>
                 </v-card-actions>

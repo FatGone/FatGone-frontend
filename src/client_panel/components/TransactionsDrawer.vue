@@ -27,6 +27,16 @@ watch(() => props.value, (value: boolean) => {
 
 const emit = defineEmits(['update:modelValue']);
 
+function onConfirm() {
+    emit('update:modelValue', false);
+    show.value = false;
+}
+
+function onReject() {
+    emit('update:modelValue', false);
+    show.value = false;
+}
+
 </script>
 <template>
     <v-navigation-drawer class="" temporary location="right" v-model="show"
@@ -53,8 +63,8 @@ const emit = defineEmits(['update:modelValue']);
             <div style="position: absolute; bottom: 0px; width: 85%; padding-bottom: 32px" class="bg-surface">
                 <v-divider></v-divider>
                 <div class="d-flex flex-row pt-4">
-                    <v-btn class="mr-4" color="primary">Zapisz</v-btn>
-                    <v-btn color="primary" variant="outlined">Anuluj</v-btn>
+                    <v-btn class="mr-4" color="primary" @click="onConfirm">Zapisz</v-btn>
+                    <v-btn color="primary" variant="outlined" @click="onReject">Anuluj</v-btn>
                 </div>
             </div>
         </div>

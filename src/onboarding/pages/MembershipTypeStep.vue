@@ -6,21 +6,16 @@ import PaginationDots from '@/onboarding/components/PaginationDots.vue'
 import router from '@/router';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import { ref } from 'vue';
-import { useMembershipStore } from '@/membership/stores/MembershipStore';
 import { OnboardingController } from '../controllers/OnboardingController';
 
 const onboardingController = new OnboardingController();
 const onboardingStore = useOnboardingStore();
-const membershipStore = useMembershipStore();
 
-async function _updateMembershipType(typeId: number) {
-    const membership = membershipStore.getMembershipById(typeId);
-    if (membership) {
-        onboardingStore.updateMembership(membership);
-        const accountDetailsDto = onboardingStore.formAccountDetailsDto();
-        await onboardingController.patchAccountDetails(accountDetailsDto);
-        _navigationIntent();
-    }
+async function _updateMembershipType(membershipTypeId: number) {
+    onboardingStore.updateMembershipTypeId(membershipTypeId);
+    const accountDetailsDto = onboardingStore.formAccountDetailsDto();
+    await onboardingController.patchAccountDetails(accountDetailsDto);
+    _navigationIntent();
 }
 
 const carnetTypes = ref([
@@ -29,7 +24,7 @@ const carnetTypes = ref([
         name: 'half-open',
         price: 49,
         benefits: [
-            "Dostęp do wszystkich obiektów AQUASPLASH",
+            "Dostęp do wszystkich obiektów FATGONE",
             "Dodatkowo płatny dostęp do sekcji SPA i Wellness",
             "4 zajęcia grupowe w miesiącu",
             "1 konsultacja z trenerem personalnym w miesiącu",
@@ -41,7 +36,7 @@ const carnetTypes = ref([
         name: 'open',
         price: 99,
         benefits: [
-            "Dostęp do wszystkich obiektów AQUASPLASH",
+            "Dostęp do wszystkich obiektów FATGONE",
             "Dostęp do sekcji SPA i Wellness",
             "Wszystkie zajęcia grupowe",
             "Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie",
@@ -66,7 +61,7 @@ function _navigationIntent(): void {
                         <p class="text-on-background fg-display-medium pt-16">Wybierz rodzaj karnetu</p>
                         <v-row>
                             <v-col v-for="carnet in carnetTypes" :key="carnet.id">
-                                <v-card color="background" class="w-100 px-8 mt-8 pb-6 rounded-lg">
+                                <v-card color="bg-surface" class="w-100 px-8 mt-8 pb-6 rounded-lg">
                                     <p class="fg-display-small text-on-surface pt-6  text-center">Karnet</p>
                                     <p class="pt-3 text-primary fg-display-large-acetone  text-center"
                                         style="text-transform: uppercase;">{{ carnet.name }}</p>

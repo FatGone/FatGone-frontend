@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
 
-import type { CardDetailsDto } from "../models/dto/CardDetailsDto";
-import type { Membership } from "@/membership/models/Membership";
+import type { CardDto } from "../../card/models/dto/CardDto";
 import type { AccountDetailsDto } from "../../accountDetails/models/dto/AccountDetailsDto";
 
 interface IState {
-    membership: Membership | undefined,
+    membershipTypeId: number,
     email: string,
     code: string,
     firstName: string,
@@ -19,12 +18,12 @@ interface IState {
     cardNumber: string,
     cardExpiryDate: string,
     shortExpiryDate: string,
-    cvvCode: number,
+    cvvNumber: number,
     cardHolder: string,
 }
 export const useOnboardingStore = defineStore('onboarding', {
     state: (): IState => ({
-        membership: undefined,
+        membershipTypeId: 0,
         email: '',
         code: '',
         firstName: '',
@@ -38,7 +37,7 @@ export const useOnboardingStore = defineStore('onboarding', {
         cardNumber: '',
         cardExpiryDate: '',
         shortExpiryDate: '',
-        cvvCode: 0,
+        cvvNumber: 0,
         cardHolder: '',
     }),
     getters: {
@@ -50,8 +49,8 @@ export const useOnboardingStore = defineStore('onboarding', {
             this.shortExpiryDate = expiryDate;
         },
 
-        updateMembership(membership: Membership) {
-            this.membership = membership;
+        updateMembershipTypeId(membershipTypeId: number) {
+            this.membershipTypeId = membershipTypeId;
         },
         updateEmail(email: string) {
             this.email = email;
@@ -70,25 +69,25 @@ export const useOnboardingStore = defineStore('onboarding', {
             this.address = this.street + ' ' + this.streetNumber + '/' + this.flatNumber;
         },
 
-        updateCardDetails(cardDetailsDto: CardDetailsDto) {
+        updateCardDetails(cardDetailsDto: CardDto) {
             this.cardNumber = cardDetailsDto.cardNumber;
             this.cardExpiryDate = cardDetailsDto.expiryDate;
-            this.cvvCode = cardDetailsDto.cvvNumber;
+            this.cvvNumber = cardDetailsDto.cvvNumber;
             this.cardHolder = cardDetailsDto.cardHolder;
         },
+
         formAccountDetailsDto(): AccountDetailsDto {
             const accountDetailsDto: AccountDetailsDto = {
                 id: 0,
                 firstName: this.firstName,
                 lastName: this.lastName,
-                phoneNumber: 'phoneNumber',
                 street: this.street,
                 streetNumber: this.streetNumber,
                 flatNumber: this.flatNumber,
                 city: this.city,
                 postCode: this.postCode,
-                membershipTypeId: (this.membership) ? this.membership.id : 1,
                 card: null,
+                clientMembership: null,
             };
             return accountDetailsDto;
 

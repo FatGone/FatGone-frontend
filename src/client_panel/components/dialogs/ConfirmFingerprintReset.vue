@@ -15,7 +15,18 @@ watch(() => props.value, (value: boolean) => {
     dialog.value = value;
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'confirm']);
+
+function onConfirm() {
+    emit('confirm');
+    emit('update:modelValue', false);
+    dialog.value = false;
+}
+
+function onReject() {
+    emit('update:modelValue', false);
+    dialog.value = false;
+}
 
 </script>
 
@@ -29,10 +40,10 @@ const emit = defineEmits(['update:modelValue']);
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn variant="text" @click="dialog = false">
+                    <v-btn variant="text" @click="onReject">
                         Anuluj
                     </v-btn>
-                    <v-btn variant="text" @click="dialog = false">
+                    <v-btn variant="text" @click="onConfirm">
                         Potwierdź
                     </v-btn>
                 </v-card-actions>

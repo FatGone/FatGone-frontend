@@ -9,11 +9,8 @@ import MembershipCard from '@/landing/components/MembershipCard.vue'
 import router from '@/router';
 import { ref } from 'vue'
 import { useAuthStore } from '@/auth/stores/AuthStore'
-import { useAccountStore } from '@/account/stores/AccountStore'
 import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore'
 import { AccountController } from '@/account/controllers/AccountController'
-import { right } from 'fp-ts/lib/EitherT'
-import { isRight } from 'fp-ts/lib/Either'
 
 const benefits = ref([
     {
@@ -22,7 +19,7 @@ const benefits = ref([
         width: 94,
         height: 124,
         title: 'Podejście szyte na miarę',
-        description: 'W Aquasplash stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
+        description: 'W FatGone stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
     },
     {
         id: 2,
@@ -38,7 +35,7 @@ const benefits = ref([
         width: 95.34,
         height: 131.88,
         title: 'Doświadczenie i jakość',
-        description: 'AquaSplash to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
+        description: 'FatGone to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
     },
 ])
 
@@ -47,7 +44,7 @@ const memberships = ref([
         id: 1,
         title: 'HALF-OPEN',
         benefits: [
-            'Dostęp do wszystkich obiektów AQUASPLASH',
+            'Dostęp do wszystkich obiektów FATGONE',
             'Dodatkowo płatny dostęp do sekcji SPA i Wellness',
             '4 zajęcia grupowe w miesiącu',
             '1 konsultacja z trenerem personalnym w miesiącu'
@@ -58,7 +55,7 @@ const memberships = ref([
         id: 2,
         title: 'OPEN',
         benefits: [
-            'Dostęp do wszystkich obiektów AQUASPLASH',
+            'Dostęp do wszystkich obiektów FATGONE',
             'Dostęp do sekcji SPA i Wellness',
             'Wszystkie zajęcia grupowe',
             'Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie'
@@ -69,7 +66,6 @@ const memberships = ref([
 
 const authStore = useAuthStore();
 const accountController = new AccountController();
-const accountStore = useAccountStore();
 const accountDetailsStore = useAccountDetailsStore();
 
 
@@ -98,7 +94,7 @@ async function _clientPanelNavigation(): Promise<void> {
                         Nie jesteś członkiem? Dołącz teraz!
                     </v-btn>
                     <p v-if="authStore.isAuthenticated" class="fg-label-large text-none pt-2">
-                        Cześć, {{ accountDetailsStore.accountDetails?.firstName }}!
+                        Cześć, {{ accountDetailsStore.firstName }}!
                     </p>
                     <v-btn v-if="!authStore.isAuthenticated" variant="flat" height="40" width="105"
                         class="fg-label-large text-none ms-10" @click="_loginPageNavigation">
@@ -112,7 +108,7 @@ async function _clientPanelNavigation(): Promise<void> {
                 <v-row class="h-screen">
                     <v-col cols="5" offset="1" align-self="center">
                         <Logo :height="163" :width="567" classes="pb-16" />
-                        <p class="fg-headline-large text-on-background pt-16 pb-16">Pływaj, relaksuj się, ciesz się
+                        <p class="fg-headline-large text-on-background pt-16 pb-16">Twoje centrum siły, wellnessu i zdrowia
                         </p>
 
                     </v-col>
@@ -174,7 +170,7 @@ async function _clientPanelNavigation(): Promise<void> {
 
 @media only screen and (min-width : 1200px) {
     .position {
-        width: 550px !important;
+        width: 500px !important;
         right: 0 !important;
     }
 

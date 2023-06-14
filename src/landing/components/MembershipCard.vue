@@ -15,7 +15,7 @@ function _updateMembership(membershipTypeId: number | undefined) {
     if (membershipTypeId) {
         const membership = membershipStore.getMembershipById(membershipTypeId)
         if (membership) {
-            onboardingStore.updateMembership(membership);
+            onboardingStore.updateMembershipTypeId(membership.id);
             router.push('/register');
         }
     }

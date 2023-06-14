@@ -8,6 +8,7 @@ import { ref } from 'vue';
 import { useOnboardingStore } from '../stores/OnboardingStore';
 import type { AccountDetailsDto } from '../../accountDetails/models/dto/AccountDetailsDto';
 import { useAccountDetailsStore } from '@/accountDetails/stores/AccountDetailsStore';
+import { OnboardingController } from '../controllers/OnboardingController';
 
 const onboardingStore = useOnboardingStore();
 const accountDetailsStore = useAccountDetailsStore();
@@ -32,18 +33,23 @@ async function _updatePersonalDetails(): Promise<void> {
             id: 0,
             firstName: name.value,
             lastName: lastName.value,
-            phoneNumber: 'phoneNumber',
             street: street.value,
             streetNumber: streetNumber.value,
             flatNumber: flatNumber.value,
             city: city.value,
             postCode: postCode.value,
-            membershipTypeId: 1,
             card: null,
+            clientMembership: null,
         };
+
+
         onboardingStore.updateAccountDetails(accountDetailsDto);
-        accountDetailsStore.setAccountDetails(accountDetailsDto);
-        if (onboardingStore.membership) {
+        accountDetailsStore.setAccountDetailsDto(accountDetailsDto);
+        const onboardingController = new OnboardingController();
+        console.log('accountDetailsDto: ' + accountDetailsDto);
+
+        await onboardingController.patchAccountDetails(accountDetailsDto);
+        if (onboardingStore.membershipTypeId) {
             router.push('/onboarding/card');
         } else {
             _navigationIntent();
