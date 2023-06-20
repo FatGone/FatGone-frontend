@@ -45,7 +45,7 @@ function onRejected() {
                     <p v-if="!isAlreadyFreezed" class="fg-body-medium">
                         Podczas mrożenia karnetu, nie będziemy obciążać cię kosztem karnetu, ale pobierzemy z twojego konta
                         opłatę manipulacyjną w wysokości 15zł za każdy miesiąc mrożenia, rozpoczynając od nowego okresu
-                        rozliczeniowego. Podczas mrożenia dostęp do placówek FatGone będzie zablokowany. Po odmrożeniu
+                        rozliczeniowego. Podczas mrożenia dostęp do placówek AquaSplash będzie zablokowany. Po odmrożeniu
                         koszt karnetu zostanie naliczony na kratę po upływie tylu dni ile w momencie mrożenia, zostało do
                         następnej płatności.
                     </p>

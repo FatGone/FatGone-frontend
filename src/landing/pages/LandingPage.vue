@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import BackgroundGirl from '@/common/components/BackgroundGirl.vue'
 import Logo from '@/common/components/FGLogo.vue'
-import BenefitIcon1 from '@/assets/svg/benefit-icon-1.svg'
-import BenefitIcon2 from '@/assets/svg/benefit-icon-2.svg'
-import BenefitIcon3 from '@/assets/svg/benefit-icon-3.svg'
+import BenefitIcon1 from '@/assets/svg/benefit-icon-1-as.svg'
+import BenefitIcon2 from '@/assets/svg/benefit-icon-2-as.svg'
+import BenefitIcon3 from '@/assets/svg/benefit-icon-3-as.svg'
 import BenefitCard from '@/landing/components/BenefitCard.vue'
 import MembershipCard from '@/landing/components/MembershipCard.vue'
 import router from '@/router';
@@ -19,7 +19,7 @@ const benefits = ref([
         width: 94,
         height: 124,
         title: 'Podejście szyte na miarę',
-        description: 'W FatGone stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
+        description: 'W AquaSplash stawiamy na indywidualne podejście do każdego klienta. Nasi trenerzy personalni i instruktorzy zajęć grupowych pomogą Ci dostosować trening do Twoich celów i potrzeb, zapewniając Ci motywację i wsparcie na każdym etapie.'
     },
     {
         id: 2,
@@ -35,7 +35,7 @@ const benefits = ref([
         width: 95.34,
         height: 131.88,
         title: 'Doświadczenie i jakość',
-        description: 'FatGone to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
+        description: 'AquaSplash to firma z wieloletnim doświadczeniem w branży fitness i wellness. Nasza oferta opiera się na najnowszych trendach i badaniach naukowych, a nasze centra wyposażone są w najlepszy sprzęt na rynku. Dzięki temu możesz mieć pewność, że otrzymasz usługi wysokiej jakości, które pozwolą Ci osiągnąć najlepsze efekty.'
     },
 ])
 
@@ -44,7 +44,7 @@ const memberships = ref([
         id: 1,
         title: 'HALF-OPEN',
         benefits: [
-            'Dostęp do wszystkich obiektów FATGONE',
+            'Dostęp do wszystkich obiektów AquaSplash',
             'Dodatkowo płatny dostęp do sekcji SPA i Wellness',
             '4 zajęcia grupowe w miesiącu',
             '1 konsultacja z trenerem personalnym w miesiącu'
@@ -55,7 +55,7 @@ const memberships = ref([
         id: 2,
         title: 'OPEN',
         benefits: [
-            'Dostęp do wszystkich obiektów FATGONE',
+            'Dostęp do wszystkich obiektów AquaSplash',
             'Dostęp do sekcji SPA i Wellness',
             'Wszystkie zajęcia grupowe',
             'Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie'

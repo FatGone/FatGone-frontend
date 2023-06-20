@@ -71,7 +71,7 @@ const events: EventSourceInput = [
         display: 'block'
     },
     {
-        title: "Puchar FatGone w wyciskaniu leżąc",
+        title: "Puchar AquaSplash w pływaniu na 100m",
         start: '2023-05-31 10:00:00',
         end: '2023-05-31 17:30:00',
         color: '#B2C5FF',

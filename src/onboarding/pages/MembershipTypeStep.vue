@@ -24,7 +24,7 @@ const carnetTypes = ref([
         name: 'half-open',
         price: 49,
         benefits: [
-            "Dostęp do wszystkich obiektów FATGONE",
+            "Dostęp do wszystkich obiektów AquaSplash",
             "Dodatkowo płatny dostęp do sekcji SPA i Wellness",
             "4 zajęcia grupowe w miesiącu",
             "1 konsultacja z trenerem personalnym w miesiącu",
@@ -36,7 +36,7 @@ const carnetTypes = ref([
         name: 'open',
         price: 99,
         benefits: [
-            "Dostęp do wszystkich obiektów FATGONE",
+            "Dostęp do wszystkich obiektów AquaSplash",
             "Dostęp do sekcji SPA i Wellness",
             "Wszystkie zajęcia grupowe",
             "Trening przygotowany i nadzorowany przez naszego specjalistę dostosowany do ciebie",

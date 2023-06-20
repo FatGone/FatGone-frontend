@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import backgroundGirl from '@/assets/svg/backgroundGirl.svg'
+import backgroundGirl from '@/assets/svg/bg-guy.png'
 
 defineProps({ classes: String })
 </script>

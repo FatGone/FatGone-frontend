@@ -38,7 +38,7 @@ async function deleteAccount() {
                 </v-card-title>
                 <v-card-text>
                     <p class="fg-body-medium">
-                        Usunięcie konta wiąże się z natychmiastową utratą dostępu do placówek FatGone oraz usunięciem
+                        Usunięcie konta wiąże się z natychmiastową utratą dostępu do placówek AquaSplash oraz usunięciem
                         wszelkich danych o użytkowniku w systemie. Żeby ponownie zamówić karnet, będzie potrzebna
                         rejestracja.
                     </p>

@@ -11,7 +11,7 @@ export default createVuetify({
   components,
   directives,
   theme: {
-    defaultTheme: 'darkTheme',
+    defaultTheme: 'aquaSplashTheme',
     themes: {
       darkTheme,
       aquaSplashTheme,
